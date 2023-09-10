@@ -1,0 +1,8 @@
+#!/bin/zsh
+
+function sync {
+    cd ~/repos/dotfiles
+    ./sync.sh -f
+    cd
+    source .zprofile
+}

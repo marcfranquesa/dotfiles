@@ -1,0 +1,14 @@
+#!/bin/zsh
+
+# Navigation
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+
+# Get week number
+alias week="date +%V"
+
+# Shortcuts
+alias cai="cd ~/repos/gced-coursework/CAI"
+alias dot="cd ~/repos/dotfiles"
