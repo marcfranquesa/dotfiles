@@ -1,8 +1,11 @@
 #!/bin/zsh
 
 function sync {
+    dir=$(pwd)
     cd ~/repos/dotfiles
     ./sync.sh -f
     cd
     source .zprofile
+    cd $dir
+    unset dir
 }

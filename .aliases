@@ -11,4 +11,12 @@ alias week="date +%V"
 
 # Shortcuts
 alias cai="cd ~/repos/gced-coursework/CAI"
+alias ap3="cd ~/repos/gced-coursework/AP3"
 alias dot="cd ~/repos/dotfiles"
+
+# Easy empties
+alias emptydw="mv ~/Downloads/* ~/.Trash"
+alias emptybin="rm -rf ~/.Trash/*"
+
+# Easy access pdfs
+alias teoi="open ~/Desktop/TEOI/Apunts.pdf"
