@@ -14,4 +14,10 @@ Thumbs.db
 .Trashes
 
 # Non essential
-.extra
+extra*
+.extra*
+test*
+.test*
+
+# Sensitive data
+secret*

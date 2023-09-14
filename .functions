@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+source ~/.raco_deliverables/.function
+
 function sync {
     dir=$(pwd)
     cd ~/repos/dotfiles

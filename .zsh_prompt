@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 # Check the UID
 if [[ $UID -ne 0 ]]; then # normal user
   PR_USER='%F{green}%n%f'

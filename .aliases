@@ -19,4 +19,4 @@ alias emptydw="mv ~/Downloads/* ~/.Trash"
 alias emptybin="rm -rf ~/.Trash/*"
 
 # Easy access pdfs
-alias teoi="open ~/Desktop/TEOI/Apunts.pdf"
+alias teoi="open -n ~/Desktop/TEOI/Apunts.pdf"
