@@ -4,7 +4,7 @@ import requests
 
 def main():
     folder = os.path.dirname(__file__)
-    secrets_path = os.path.join(folder, "secrets.json")
+    secrets_path = os.path.join(folder, ".secrets", "raco_deliverables.json")
     secrets_file = open(secrets_path, "r+")
     secrets = json.load(secrets_file)
     

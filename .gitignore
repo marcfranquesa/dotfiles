@@ -20,4 +20,4 @@ test*
 .test*
 
 # Sensitive data
-secret*
+.secret*

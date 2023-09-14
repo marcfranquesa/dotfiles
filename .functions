@@ -1,7 +1,5 @@
 #!/bin/zsh
 
-source ~/.raco_deliverables/.function
-
 function sync {
     dir=$(pwd)
     cd ~/repos/dotfiles
@@ -10,4 +8,19 @@ function sync {
     source .zprofile
     cd $dir
     unset dir
+}
+
+function raco {
+    env_name=$(conda env list | awk "{print $1;}" | grep raco_deliverables)
+    if [[ -z $env_name ]]; then
+        echo Creating new environment and installing dependencies...
+        conda create -n raco_deliverables -y -q > /dev/null
+        conda activate raco_deliverables
+        conda install python -y -q > /dev/null
+        pip install requests > /dev/null
+        echo "Done! \n"; else
+        conda activate raco_deliverables
+    fi
+    python ~/.raco_deliverables/main.py
+    conda deactivate
 }
