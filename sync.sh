@@ -10,6 +10,8 @@ function main() {
 		--exclude "README.md" \
 		--exclude "LICENSE" \
         --exclude ".gitignore" \
+		--exclude ".secrets" \
+		--exclude "tests" \
 		-avh --no-perms . ~
 }
 

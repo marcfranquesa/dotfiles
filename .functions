@@ -21,6 +21,6 @@ function raco {
         echo "Done! \n"; else
         conda activate raco_deliverables
     fi
-    python ~/.raco_deliverables/main.py
+    python ~/.scripts/raco_deliverables.py
     conda deactivate
 }
