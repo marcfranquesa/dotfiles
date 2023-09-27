@@ -45,7 +45,7 @@ def show_deliverables(deliverables: Dict[str, Any]) -> None:
         "VI": 270219,
     }
 
-    base_course_url = "https://raco.fib.upc.edu/home/assignatura?espai="
+    base_course_url = "https://raco.fib.upc.edu/practiques/llista.jsp?espai="
     for deliverable in deliverables:
         course = deliverable["codi_asg"].split("-")[0]
         description = deliverable["titol"]
@@ -69,6 +69,7 @@ def main() -> None:
         deliverables = get_deliverables(secrets)
 
     show_deliverables(deliverables["results"])
+    secrets_file.close()
 
 
 if __name__ == "__main__":

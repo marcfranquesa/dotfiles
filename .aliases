@@ -9,14 +9,32 @@ alias .....="cd ../../../.."
 # Get week number
 alias week="date +%V"
 
-# Shortcuts
-alias cai="cd ~/repos/gced-coursework/CAI"
-alias ap3="cd ~/repos/gced-coursework/AP3"
-alias dot="cd ~/repos/dotfiles"
-
 # Easy empties
 alias emptydw="mv ~/Downloads/* ~/.Trash"
 alias emptybin="rm -rf ~/.Trash/*"
 
-# Easy access pdfs
+# Quick ls
+alias lsdw="ls ~/Downloads/"
+
+# Quick cd
+alias dot="cd ~/repos/dotfiles"
+
+# Move all downloads
+alias mvdw="mv ~/Downloads/* ."
+
+# Git
+alias gs="git status"
+alias ga="git add"
+alias gaa="git add ."
+alias gc="git commit"
+alias gca="git commit --amend"
+alias gp="git push"
+alias gpf="git push --force"
+
+# Uni Specific
+alias cai="cd ~/repos/gced-coursework/CAI"
+alias caij="cd ~/repos/gced-coursework/CAI && conda activate base && jupyter notebook"
+alias vi="cd ~/repos/gced-coursework/VI"
+alias vij="cd ~/repos/gced-coursework/VI && conda activate base && jupyter notebook"
+alias ap3="cd ~/repos/gced-coursework/AP3"
 alias teoi="open -n ~/Desktop/TEOI/Apunts.pdf"
