@@ -3,7 +3,8 @@
 git pull origin main;
 
 function main() {
-	rsync --exclude ".git/" \
+	rsync \
+		--exclude ".git/" \
 		--exclude ".DS_Store" \
 		--exclude ".osx" \
 		--exclude "sync.sh" \

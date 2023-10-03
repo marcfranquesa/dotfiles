@@ -1,11 +1,17 @@
 #!/bin/zsh
 
-function sync {
-    dir=$(pwd)
-    cd ~/repos/dotfiles
-    ./sync.sh -f
-    cd
-    source .zprofile
-    cd $dir
-    unset dir
+# Move latest N ($1) files from the Downloads folder
+function mvdw {
+   local nfiles=$1
+   # Moves 1 file if parameter not defined
+   if [[ ! -n $nfiles ]]; then
+      nfiles=1
+   fi
+
+   # Will not move if insufficient files are found
+   local files=$(ls -d -t1 ~/Downloads/* |  head -n $nfiles)
+   if [[ ${#files} -lt $nfiles ]]; then
+      echo Not enough files were found; else
+      mv $files .
+   fi
 }

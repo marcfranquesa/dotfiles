@@ -20,10 +20,11 @@ alias lsdw="ls ~/Downloads/"
 alias dot="cd ~/repos/dotfiles"
 
 # Move all downloads
-alias mvdw="mv ~/Downloads/* ."
+alias mvdwa="mv ~/Downloads/* ."
 
 # Git
 alias gs="git status"
+alias gd="git diff"
 alias ga="git add"
 alias gaa="git add ."
 alias gc="git commit"
