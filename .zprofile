@@ -1,3 +1,3 @@
-for file in ~/.{aliases,exports,extra,functions,zsh_prompt}; do
+for file in ~/.{aliases,bindkeys,exports,extra,functions,zsh_prompt}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
