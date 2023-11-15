@@ -32,6 +32,11 @@ alias gca="git commit --amend"
 alias gp="git push"
 alias gpf="git push --force"
 
+# Conda
+alias condaa="conda activate"
+alias condad="conda deactivate"
+alias jn="base && jupyter notebook"
+
 # Uni Specific
 alias cai="cd ~/repos/gced-coursework/CAI"
 alias caij="cd ~/repos/gced-coursework/CAI && conda activate base && jupyter notebook"

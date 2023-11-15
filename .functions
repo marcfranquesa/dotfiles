@@ -15,3 +15,14 @@ function mvdw {
       mv $files .
    fi
 }
+
+
+# Enter base environment in conda
+function base {
+    if [ "$CONDA_DEFAULT_ENV" = "" ]; then
+        conda activate base
+    elif [ "$CONDA_DEFAULT_ENV" != "base" ]; then
+        conda deactivate $CONDA_DEFAULT_ENV
+        conda activate base
+    fi
+}
