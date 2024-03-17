@@ -19,10 +19,11 @@ precmd() { vcs_info }
 zstyle ':vcs_info:git:*' formats 'on %b'
 setopt PROMPT_SUBST
 
-local user_host="${PR_USER}%F{cyan}"
+local machine="%F{cyan}%m%f"
+local user_host="${PR_USER}"
 local current_dir="%B%F{blue}%~%f%b"
 
-PROMPT="${user_host} ${current_dir}
+PROMPT="${user_host} in ${machine} ${current_dir}
 $PR_PROMPT "
 RPROMPT=\$vcs_info_msg_0_
 
