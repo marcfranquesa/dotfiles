@@ -35,6 +35,7 @@ alias gco="git checkout"
 alias gp="git push origin HEAD"
 alias gpf="git push origin HEAD --force"
 alias gl="git pull --prune"
+# alias glf="git fetch && git reset --hard origin/<branch_name>"
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 
 # Conda
