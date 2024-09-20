@@ -21,3 +21,8 @@ test*
 
 # Sensitive data
 .secret*
+
+# zsh
+.zcompdump
+.zsh_sessions
+.zsh_history
