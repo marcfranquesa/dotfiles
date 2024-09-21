@@ -1,1 +1,2 @@
-require("core.remap")
+require("core.maps")
+require("core.options")
