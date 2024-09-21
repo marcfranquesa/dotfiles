@@ -1,0 +1,6 @@
+zsh
+nvim
+stow
+ripgrep
+tmux
+
