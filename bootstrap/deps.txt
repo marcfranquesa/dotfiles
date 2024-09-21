@@ -1,5 +1,5 @@
 zsh
-nvim
+neovim
 luarocks
 stow
 ripgrep
