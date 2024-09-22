@@ -1,0 +1,16 @@
+#!/bin/sh
+
+nfiles=$1
+  if [[ -z $nfiles ]]; then
+  nfiles=1
+fi
+
+files=($(ls -d -t1 $XDG_DOWNLOAD_DIR/* | head -n $nfiles))
+
+if [[ ${#files[@]} -lt $nfiles ]]; then
+  echo Not enough files were found; else
+  for file in ${files[@]}; do
+    echo $file
+    mv $file .
+  done
+fi

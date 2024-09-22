@@ -12,7 +12,6 @@ HISTFILE="$XDG_CACHE_HOME/zsh/history"
 
 # load prompt and functions
 [ -f "$ZDOTDIR/prompt" ] && source "$ZDOTDIR/prompt"
-[ -f "$ZDOTDIR/functions" ] && source "$ZDOTDIR/functions"
 
 # basic auto/tab complete
 autoload -U compinit
