@@ -9,8 +9,9 @@ export XDG_DOWNLOAD_DIR="$HOME/Downloads"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export GOPATH="$XDG_DATA_HOME/go"
 
-# default programs
+# defaults
 export EDITOR="nvim"
+export TERM=xterm-256color
 
 # macos
 [ "$(uname)" = "Darwin" ] && source "$XDG_CONFIG_HOME/shell/macos"
@@ -22,3 +23,4 @@ export EDITOR="nvim"
 typeset -U path
 path+=(~/.local/bin{,/**/*(N/)})
 unsetopt PROMPT_SP
+
