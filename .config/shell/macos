@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# brew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# disable default mac zsh config
+export SHELL_SESSIONS_DISABLE=1
+

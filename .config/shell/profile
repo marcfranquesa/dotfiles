@@ -9,11 +9,8 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 # default programs
 export EDITOR="nvim"
 
-# brew
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
-# disable default mac zsh config
-export SHELL_SESSIONS_DISABLE=1
+# macos
+[ "$(uname)" = "Darwin" ] && source "$XDG_CONFIG_HOME/shell/macos"
 
 # load aliases
 [ -f "$XDG_CONFIG_HOME/shell/aliases" ] && source "$XDG_CONFIG_HOME/shell/aliases"
