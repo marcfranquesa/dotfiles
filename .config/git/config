@@ -1,5 +1,5 @@
 [user]
-	email = 110655741+marcfranquesa@users.noreply.github.com
+	email = git@marcfranquesa.com 
 	name = Marc Franquesa
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
