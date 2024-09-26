@@ -8,6 +8,7 @@ return {
         build = "make",
       },
     },
+    opts = { theme = "rose-pine-moon" },
     keys = {
       { "<leader>/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer search" },
       { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
