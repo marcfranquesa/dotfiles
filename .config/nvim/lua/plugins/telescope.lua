@@ -1,6 +1,7 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
+    branch = "0.1.x",
     dependencies = {
       { "nvim-lua/plenary.nvim" },
       {
@@ -8,7 +9,7 @@ return {
         build = "make",
       },
     },
-    opts = { theme = "rose-pine-moon" },
+    opts = { theme = "auto" },
     keys = {
       { "<leader>/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer search" },
       { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },

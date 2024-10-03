@@ -15,27 +15,10 @@ return {
       "xml",
     },
     indent = { enable = true },
-    highlight = {
-      enable = true,
-      use_languagetree = true,
-      custom_captures = {
-        ["punctuation.delimiter"] = "TSInclude",
-        ["punctuation.special"] = "TSInclude",
-        ["text.math"] = "TSFunction",
-        ["text.title"] = "TSParameter",
-      },
-    },
-    rainbow = {
-      enable = true,
-      extended_mode = true,
-      max_file_lines = nil,
-    },
-    context_commentstring = {
-      enable = true,
-      enable_autocmd = false,
-      config = {
-        lua = "-- %s",
-      },
-    },
+    highlight = { enable = true },
+    playground = { enable = true },
   },
+  config = function(_, opts)
+    require("nvim-treesitter.configs").setup(opts)
+  end,
 }
