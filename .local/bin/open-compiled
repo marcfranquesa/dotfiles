@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# back-end script that outputs a compiled program
+
+basename="${1%.*}"
+
+tex_open(){
+  [ -f "$basename".pdf ] || basename="main"
+  setsid -f zathura "$basename".pdf >/dev/null 2>&1 
+}
+
+case "${*}" in
+  *.tex) tex_open ;;
+esac

@@ -9,7 +9,12 @@ ext="${file##*.}"
 
 cd "$dir" || exit 1
 
-textype() { \
+if [ -f "$dir/makefile" ] || [ -f "$dir/Makefile" ]; then
+  make
+  exit 0
+fi
+
+tex_compile() { \
   command="pdflatex -shell-escape"
   $command --output-directory="$dir" "$base" &&
   grep -qi addbibresource "$file" &&
@@ -19,6 +24,5 @@ textype() { \
 }
 
 case "$ext" in
-  tex) textype "$file" ;;
-  *) sed -n '/^#!/s/^#!//p; q' "$file" | xargs -r -I % "$file" ;;
+  tex) tex_compile "$file" ;;
 esac

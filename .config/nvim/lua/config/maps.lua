@@ -17,5 +17,5 @@ map("n", "<C-u>", "<C-u>zz") -- center when jumping around
 map("n", "<leader>j", "<cmd>bnext<cr>") -- move to right buffer
 map("n", "<leader>k", "<cmd>bprevious<cr>") -- move to left buffer
 
-map("n", "<leader>3", ":w! | :AsyncRun vim_compile '<c-r>%'<CR>") -- compile documents
-map("n", "<leader>4", ":!vim_output <c-r>%<CR><CR>") -- open compiled documents
+map("n", "<leader>c", ":w! | :AsyncRun compile '<c-r>%'<CR>") -- compile documents
+map("n", "<leader>o", ":!open-compiled <c-r>%<CR><CR>") -- open compiled documents
