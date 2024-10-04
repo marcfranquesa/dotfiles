@@ -30,7 +30,6 @@ alias gpf="git push origin HEAD --force"
 alias gl="git pull --prune"
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 
-# conda
-alias condaa="conda activate"
-alias condad="conda deactivate"
-alias jn="base && jupyter notebook"
+# tmux
+[ -x "$(command -v tmux)" ] && alias t="tmux"
+[ -x "$(command -v tmux-sessionizer)" ] && alias ts="tmux-sessionizer"

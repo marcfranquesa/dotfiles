@@ -15,11 +15,11 @@ export EDITOR="nvim"
 # macos
 [ "$(uname)" = "Darwin" ] && source "$XDG_CONFIG_HOME/shell/macos"
 
-# load aliases
-[ -f "$XDG_CONFIG_HOME/shell/aliases" ] && source "$XDG_CONFIG_HOME/shell/aliases"
-
 # adds `~/.local/bin` to $PATH recursively
 typeset -U path
 path+=(~/.local/bin{,/**/*(N/)})
 unsetopt PROMPT_SP
+
+# load aliases
+[ -f "$XDG_CONFIG_HOME/shell/aliases" ] && source "$XDG_CONFIG_HOME/shell/aliases"
 
