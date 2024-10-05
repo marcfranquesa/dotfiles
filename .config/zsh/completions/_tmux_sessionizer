@@ -1,0 +1,12 @@
+#compdef tmux-sessionizer
+
+_tmux-sessionizer() {
+  local sessions
+
+  sessions=($(tmux list-sessions -F "#{session_name}"))
+
+  _arguments \
+    '*:Session name:(${sessions[@]})'
+}
+
+_tmux-sessionizer "$@"

@@ -9,11 +9,14 @@ zle_highlight=('paste:none') # don't highlight paste
 HISTSIZE=10000000
 SAVEHIST=10000000
 HISTFILE="$XDG_CACHE_HOME/zsh/history"
+setopt hist_ignore_all_dups
+setopt hist_find_no_dups
 
-# load prompt and functions
+# load prompt
 [ -f "$ZDOTDIR/prompt" ] && source "$ZDOTDIR/prompt"
 
 # basic auto/tab complete
+fpath=($fpath "$XDG_CONFIG_HOME/zsh/completions") # custom completions
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
