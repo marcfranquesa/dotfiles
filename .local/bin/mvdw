@@ -1,16 +1,21 @@
 #!/bin/sh
 
 nfiles=$1
-  if [[ -z $nfiles ]]; then
+
+if [ -z "$nfiles" ]; then
   nfiles=1
 fi
 
-files=($(ls -d -t1 $XDG_DOWNLOAD_DIR/* | head -n $nfiles))
+files=$(find "$XDG_DOWNLOAD_DIR" -print0 | xargs -0 ls -t | head -n "$nfiles")
 
-if [[ ${#files[@]} -lt $nfiles ]]; then
-  echo Not enough files were found; else
-  for file in ${files[@]}; do
-    echo $file
-    mv $file .
+count=$(echo "$files" | grep -c '^')
+
+if [ "$count" -lt "$nfiles" ]; then
+  echo "Not enough files were found."
+else
+  echo "$files" | while IFS= read -r file; do
+    echo "$file"
+    mv "$file" .
   done
 fi
+
