@@ -2,9 +2,12 @@
 
 [ -x "$(command -v tmux)" ] || { echo "tmux is not present"; exit 1; }
 
-[ $# -eq 1 ] || { echo "Usage: $0 <session_name>"; exit 1; }
-
-session="$1"
+if [ $# -eq 1 ]; then
+    session=$1
+else
+    [ -x "$(command -v fzf)" ] || { echo "Usage: $0 <session_name>"; exit 1; }
+    session=$(tmux list-sessions -F "#{session_name}" | fzf)
+fi
 
 if ! tmux has-session -t "$session" 2>/dev/null; then
     [ -z "$TMUX" ] && tmux new-session -s "$session" && exit 0

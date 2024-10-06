@@ -32,5 +32,7 @@ bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -v '^?' backward-delete-char
 
-# search
+# bindkeys
 bindkey '^R' history-incremental-search-backward
+[ -x "$(command -v tmux-sessionizer)" ] && bindkey -s '^F' "tmux-sessionizer^M"
+
