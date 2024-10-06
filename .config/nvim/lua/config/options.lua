@@ -10,6 +10,7 @@ local options = {
     shiftwidth = 4,
     expandtab = true,
     showmode = false,
+    wrap = false,
 }
 
 for k, v in pairs(options) do
