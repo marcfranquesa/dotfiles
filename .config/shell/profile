@@ -1,24 +1,36 @@
 #!/bin/sh
 
+# adds `~/.local/bin` to $PATH recursively
+typeset -U path
+path+=(~/.local/bin{,/**/*(N/)})
+unsetopt PROMPT_SP
+
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 export XDG_DOWNLOAD_DIR="$HOME/Downloads"
+export XDG_DESKTOP_DIR="$HOME/Desktop"
+
+export HISTFILE="$XDG_DATA_HOME:-$HOME/history"
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 export GOPATH="$XDG_DATA_HOME/go"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+export NODE_REPL_HISTORY="$XDG_DATA_HOME/node_repl_history"
+export SQLITE_HISTORY="$XDG_DATA_HOME/sqlite_history"
+export R_LIBS_USER="$XDG_DATA_HOME/R/library"
+export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME/python"
+export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter"
+export IPYTHONDIR="$XDG_CONFIG_HOME/jupyter"
 
 # defaults
 export EDITOR="nvim"
 
 # macos
 [ "$(uname)" = "Darwin" ] && source "$XDG_CONFIG_HOME/shell/macos"
-
-# adds `~/.local/bin` to $PATH recursively
-typeset -U path
-path+=(~/.local/bin{,/**/*(N/)})
-unsetopt PROMPT_SP
 
 # load aliases
 [ -f "$XDG_CONFIG_HOME/shell/aliases" ] && source "$XDG_CONFIG_HOME/shell/aliases"
