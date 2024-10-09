@@ -1,7 +1,0 @@
-zsh
-neovim
-luarocks
-stow
-ripgrep
-tmux
-
