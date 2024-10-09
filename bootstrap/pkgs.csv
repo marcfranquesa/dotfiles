@@ -1,0 +1,15 @@
+NAME,DESCRIPTION
+biber,Backend processor for BibLaTeX
+fzf,Fuzzy finder
+go,Statically typed, compiled high-level programming language 
+neovim,Fork of vim with useful features
+pandoc,Converts most markup formats
+poetry,Manages and installs python package dependencies
+pyenv,Python version management
+ripgrep,Faster grep
+texlive,Distribution for the TeX typesetting system
+tmux,Terminal multiplexer
+stow,Organize software neatly under a single directory tree
+wget,Retrieves files from web
+zathura,Minimalist document viewer
+zathura-pdf-poppler,Adds PDF support to zathura
