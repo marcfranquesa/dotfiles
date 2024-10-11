@@ -12,6 +12,7 @@ mason_lspconfig.setup({
         "lua_ls",
         "pyright",
         "texlab",
+        "gopls",
     },
     automatic_installation = true,
 })

@@ -21,3 +21,7 @@ lspconfig.pyright.setup({
 lspconfig.texlab.setup({
     capabilities = capabilities,
 })
+
+lspconfig.gopls.setup({
+    capabilities = capabilities,
+})

@@ -10,6 +10,10 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 map("n", ";", ":", { silent = false }) -- semicolon to enter command mode
+map("n", "-", "<cmd>Ex<CR>") -- escape
+map("n", "U", "<C-r>") -- redo
+
+map("n", "`", "<Nop>") -- ignore `, only jump to markers with '
 
 map("n", "<C-d>", "<C-d>zz") -- center when jumping around
 map("n", "<C-u>", "<C-u>zz") -- center when jumping around

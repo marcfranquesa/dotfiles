@@ -13,6 +13,7 @@ return {
             "regex",
             "toml",
             "xml",
+            "go",
         },
         indent = { enable = true },
         highlight = { enable = true },
