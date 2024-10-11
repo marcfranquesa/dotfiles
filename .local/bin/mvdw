@@ -1,16 +1,19 @@
 #!/bin/sh
 
 nfiles=$1
-  if [[ -z $nfiles ]]; then
+
+if [ -z "$nfiles" ]; then
   nfiles=1
 fi
 
-files=($(ls -d -t1 $XDG_DOWNLOAD_DIR/* | head -n $nfiles))
+count=$( ls -A "$XDG_DOWNLOAD_DIR" | wc -l | tr -d '[:space:]' )
 
-if [[ ${#files[@]} -lt $nfiles ]]; then
-  echo Not enough files were found; else
-  for file in ${files[@]}; do
-    echo $file
-    mv $file .
-  done
+if [ "$count" -lt "$nfiles" ]; then
+    echo "Only $count files found in $XDG_DOWNLOAD_DIR."
+    exit 1
 fi
+
+ls -tr "$XDG_DOWNLOAD_DIR" | tail -"$nfiles" | while IFS= read -r file; do
+  mv "$XDG_DOWNLOAD_DIR/$file" .
+  echo "$file"
+done

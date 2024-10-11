@@ -3,7 +3,7 @@
 # back-end script that compiles different programming languages
 
 file=$(readlink -f "$1")
-dir=${file%/*}
+dir=${file%/"$1"}
 base="${file%.*}"
 ext="${file##*.}"
 
