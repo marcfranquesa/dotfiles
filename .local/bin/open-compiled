@@ -2,7 +2,8 @@
 
 # back-end script that outputs a compiled program
 
-basename="${1%.*}"
+filename=$(basename "$1")
+basename="${filename%.*}"
 
 tex_open(){
   [ -f "$basename".pdf ] || basename="main"
