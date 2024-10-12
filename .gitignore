@@ -1,28 +1,33 @@
-# Compiled Python files
+# compiled python files
 *.pyc
 
-# Folder view configuration files
+# folder view configuration files
 .DS_Store
 Desktop.ini
 
-# Thumbnail cache files
+# thumbnail cache files
 ._*
 Thumbs.db
 
-# Files that might appear on external disks
+# files that might appear on external disks
 .Spotlight-V100
 .Trashes
 
-# Non essential
+# non essential
 extra*
 .extra*
 test*
 .test*
 
-# Sensitive data
+# sensitive data
 .secret*
 
 # zsh
+.zprofile
 .zcompdump
 .zsh_sessions
 .zsh_history
+
+# bash
+.bash_profile
+

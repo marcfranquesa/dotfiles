@@ -41,3 +41,12 @@ export EDITOR="nvim"
 [ -d $PYENV_ROOT/bin ] && PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
+# switch to zsh
+if [ "$(basename "$SHELL")" != "zsh" ]; then
+    if command -v zsh > /dev/null; then
+        exec zsh
+    else
+        echo "zsh is not present"
+    fi
+fi
+
