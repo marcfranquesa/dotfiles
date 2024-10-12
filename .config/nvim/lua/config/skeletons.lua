@@ -17,3 +17,11 @@ vim.api.nvim_create_autocmd({ "BufNewFile" }, {
         vim.cmd("call cursor(5, 5)")
     end,
 })
+
+vim.api.nvim_create_autocmd({ "BufNewFile" }, {
+    pattern = "pyproject.toml",
+    callback = function()
+        vim.cmd("0r " .. config_home .. "/nvim/skeletons/pyproject.skeleton")
+        vim.cmd("0")
+    end,
+})
