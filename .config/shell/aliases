@@ -9,12 +9,6 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
-alias lsdw="ls ~/Downloads/"
-alias dot="cd ~/repos/dotfiles"
-
-# move all downloads
-alias mvdwa="mv ~/Downloads/* ."
-
 # git
 alias g="git"
 alias gs="git status -sb"

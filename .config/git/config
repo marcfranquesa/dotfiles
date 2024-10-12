@@ -1,6 +1,9 @@
 [user]
 	email = git@marcfranquesa.com 
 	name = Marc Franquesa
+[alias]
+    co = checkout
+    cp = cherry-pick
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process

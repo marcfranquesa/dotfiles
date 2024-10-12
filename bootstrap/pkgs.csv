@@ -3,6 +3,7 @@ biber,Backend processor for BibLaTeX
 fzf,Fuzzy finder
 go,Statically typed, compiled high-level programming language 
 neovim,Fork of vim with useful features
+node,JavaScript runtime built on V8
 pandoc,Converts most markup formats
 poetry,Manages and installs python package dependencies
 pyenv,Python version management
