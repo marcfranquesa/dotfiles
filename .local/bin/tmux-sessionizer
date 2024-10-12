@@ -1,11 +1,11 @@
 #!/bin/sh
 
-[ -x "$(command -v tmux)" ] || { echo "tmux is not present"; exit 1; }
+command -v tmux > /dev/null || { echo "tmux is not present"; exit 1; }
 
 if [ $# -eq 1 ]; then
     session=$1
 else
-    [ -x "$(command -v fzf)" ] || { echo "Usage: $0 <session_name>"; exit 1; }
+    command -v fzf > /dev/null || { echo "Usage: $0 <session_name>"; exit 1; }
     session=$(tmux list-sessions -F "#{session_name}" | fzf)
 fi
 

@@ -15,6 +15,6 @@ case "$shell" in
         ;;
 esac
 
-[ -x "$(command -v stow)" ] && stow . && exit 0
+command -v stow > /dev/null && stow . && exit 0
 
 echo "stow is not present" && exit 1

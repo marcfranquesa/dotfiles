@@ -32,21 +32,23 @@ export IPYTHONDIR="$XDG_CONFIG_HOME/jupyter"
 export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
 
 # defaults
-export EDITOR="nvim"
+export EDITOR="vim"
 
 # macos
 [ "$(uname)" = "Darwin" ] && source "$XDG_CONFIG_HOME/shell/macos"
 
 # pyenv
 [ -d $PYENV_ROOT/bin ] && PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+command -v pyenv > /dev/null && eval "$(pyenv init -)"
 
 # switch to zsh
-if [ "$(basename "$SHELL")" != "zsh" ]; then
+default_shell="$(basename "$SHELL")"
+if [ $default_shell != "zsh" ]; then
     if command -v zsh > /dev/null; then
+        echo "Default shell is $default_shell, switching to zsh."
         exec zsh
     else
-        echo "zsh is not present"
+        echo "Default shell is $default_shell and zsh is not present."
     fi
 fi
 
