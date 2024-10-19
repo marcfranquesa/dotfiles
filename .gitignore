@@ -31,3 +31,6 @@ test*
 # bash
 .bash_profile
 
+# config
+jupyter
+htop
