@@ -29,4 +29,4 @@ command -v tmux > /dev/null && alias t="tmux"
 command -v tmux-sessionizer > /dev/null && alias ts="tmux-sessionizer"
 
 # wget
-alias wget="wget --hsts-file=$XDG_DATA_HOME/wget/hsts"
+alias wget="wget --hsts-file=$XDG_STATE_HOME/wget-hsts"
