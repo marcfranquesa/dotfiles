@@ -1,4 +1,5 @@
 require("config.skeletons")
 require("config.maps")
 require("config.options")
+require("config.format")
 require("config.lazy")

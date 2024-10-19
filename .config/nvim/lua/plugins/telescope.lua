@@ -1,4 +1,5 @@
 return {
+    { "nvim-telescope/telescope-ui-select.nvim" },
     {
         "nvim-telescope/telescope.nvim",
         branch = "0.1.x",
@@ -42,9 +43,14 @@ return {
                 },
                 extensions = {
                     "fzf",
+                    ["ui-select"] = {
+                        require("telescope.themes").get_dropdown({}),
+                    },
                 },
             })
+
             telescope.load_extension("fzf")
+            telescope.load_extension("ui-select")
         end,
     },
 }
