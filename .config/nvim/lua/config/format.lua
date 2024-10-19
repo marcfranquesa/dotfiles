@@ -16,7 +16,7 @@ local function format_file()
         formatters = python_formatters
     elseif file_type == "sh" then
         formatters = shell_formatters
-    elseif file_type == "tex" then
+    elseif file_type == "tex" or file_type == "bib" then
         formatters = tex_formatters
     end
 
@@ -35,4 +35,4 @@ end
 
 vim.api.nvim_create_user_command("FormatFile", format_file, {})
 
-vim.api.nvim_set_keymap("n", "<leader>F", ":FormatFile<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>F", ":FormatFile<cr>", { noremap = true, silent = true })

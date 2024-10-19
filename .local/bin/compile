@@ -13,7 +13,7 @@ fi
 
 
 tex_compile() {
-    command="pdflatex -shell-escape"
+    command="pdflatex -shell-escape -synctex=1"
     aux_files_dir="."
 
     if [ -f "main.tex" ]; then
