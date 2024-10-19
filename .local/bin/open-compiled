@@ -1,15 +1,17 @@
 #!/bin/sh
 
-# back-end script that outputs a compiled program
+# back-end script that opens a compiled file
 
-filename=$(basename "$1")
-basename="${filename%.*}"
+file="${1}"
+ext="${file##*.}"
+dir=$(dirname "$file")
+base="${file%.*}"
 
 tex_open(){
-  [ -f "$basename".pdf ] || basename="main"
-  setsid -f zathura "$basename".pdf >/dev/null 2>&1 
+    [ -f "${base}".pdf ] || base="main"
+    setsid -f zathura "${base}".pdf >/dev/null 2>&1 
 }
 
 case "${*}" in
-  *.tex) tex_open ;;
+    *.tex) tex_open ;;
 esac

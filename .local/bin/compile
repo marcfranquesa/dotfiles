@@ -1,28 +1,45 @@
 #!/bin/sh
 
-# back-end script that compiles different programming languages
+# back-end script that compiles/runs different programming languages
 
-file=$(readlink -f "$1")
-dir=${file%/"$1"}
-base="${file%.*}"
+file="${1}"
 ext="${file##*.}"
+dir=$(dirname "$file")
+base="${file%.*}"
 
-cd "$dir" || exit 1
-
-if [ -f "$dir/makefile" ] || [ -f "$dir/Makefile" ]; then
-  make
-  exit 0
+if [ -f "makefile" ] || [ -f "Makefile" ]; then
+    make && exit 0
 fi
 
-tex_compile() { \
-  command="pdflatex -shell-escape"
-  $command --output-directory="$dir" "$base" &&
-  grep -qi addbibresource "$file" &&
-  biber "$base" &&
-  $command --output-directory="$dir" "$base" &&
-  $command --output-directory="$dir" "$base"
+
+tex_compile() {
+    command="pdflatex -shell-escape"
+    aux_files_dir="."
+
+    if [ -f "main.tex" ]; then
+        textarget="main.tex"
+    else
+        textarget="${file}"
+        aux_files_dir="${dir}"
+    fi
+
+    ${command} --output-directory="${aux_files_dir}" "${textarget}" &&
+    grep -qi addbibresource "${textarget}" &&
+    biber --input-directory="${aux_files_dir}" "${textarget%.*}" &&
+    ${command} --output-directory="${aux_files_dir}" "${textarget}" &&
+    ${command} --output-directory="${aux_files_dir}" "${textarget}"
 }
 
+
+py_run() {
+    command="python"
+    [ -f "poetry.lock" ] && command="poetry run ${command}"
+
+    ${command} "${file}"
+}
+
+
 case "$ext" in
-  tex) tex_compile "$file" ;;
+    py) py_run ;;
+    tex) tex_compile ;;
 esac
