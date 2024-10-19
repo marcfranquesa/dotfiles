@@ -27,3 +27,6 @@ alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C
 # tmux
 command -v tmux > /dev/null && alias t="tmux"
 command -v tmux-sessionizer > /dev/null && alias ts="tmux-sessionizer"
+
+# wget
+alias wget="wget --hsts-file=$XDG_DATA_HOME/wget/hsts"

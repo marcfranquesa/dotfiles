@@ -39,6 +39,8 @@ export R_LIBS_USER="$XDG_DATA_HOME/R/library"
 
 export PYTHONUSERBASE="$XDG_DATA_HOME/python"
 export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME/python"
+export PYTHON_HISTORY="$XDG_DATA_HOME/python/history"
+
 export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter"
 export IPYTHONDIR="$XDG_CONFIG_HOME/jupyter"
 
