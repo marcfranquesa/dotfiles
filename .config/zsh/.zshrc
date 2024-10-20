@@ -11,7 +11,7 @@ zle_highlight=('paste:none') # don't highlight paste
 # history in cache directory
 HISTSIZE=10000000
 SAVEHIST=10000000
-HISTFILE="$XDG_CACHE_HOME/zsh/history"
+HISTFILE="$XDG_STATE_HOME/zsh_history"
 setopt hist_ignore_all_dups
 setopt hist_find_no_dups
 
@@ -24,7 +24,7 @@ fpath=($fpath "$XDG_CONFIG_HOME/zsh/completions") # custom completions
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
-compinit -d "$XDG_CACHE_HOME/zsh/compdump"
+compinit -d "$XDG_STATE_HOME/zcompdump"
 _comp_options+=(globdots) # include hidden files
 
 # vi mode
