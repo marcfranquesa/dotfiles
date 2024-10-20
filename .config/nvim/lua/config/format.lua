@@ -5,20 +5,19 @@ local lua_formatters = { "stylua --indent-type Spaces --indent-width 4 --sort-re
 local shell_formatters = { "shfmt" }
 local tex_formatters = { "tex-fmt --tab 4" }
 
+local all_formatters = {
+    python = python_formatters,
+    lua = lua_formatters,
+    sh = shell_formatters,
+    tex = tex_formatters,
+    bib = tex_formatters,
+}
+
 local function format_file()
     local file_path = vim.api.nvim_buf_get_name(0)
     local file_type = vim.bo.filetype
 
-    local formatters = {}
-    if file_type == "lua" then
-        formatters = lua_formatters
-    elseif file_type == "python" then
-        formatters = python_formatters
-    elseif file_type == "sh" then
-        formatters = shell_formatters
-    elseif file_type == "tex" or file_type == "bib" then
-        formatters = tex_formatters
-    end
+    local formatters = all_formatters[file_type] or {}
 
     vim.cmd("silent write!")
 

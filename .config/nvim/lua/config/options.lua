@@ -51,6 +51,7 @@ end
 local regexes = {
     [[\./$,\.\./$,\.git/$]],
     [[\.DS_Store$]],
+    [[\.venv/$]],
     table.concat(extensions, ","),
     vim.fn["netrw_gitignore#Hide"](),
 }
