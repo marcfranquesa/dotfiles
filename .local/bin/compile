@@ -16,7 +16,7 @@ tex_compile() {
     command="pdflatex -shell-escape -synctex=1"
     aux_files_dir="."
 
-    if [ -f "main.tex" ]; then
+    if ! grep -qi "documentclass" "${file}" && [ -f "main.tex" ]; then
         textarget="main.tex"
     else
         textarget="${file}"
@@ -24,7 +24,7 @@ tex_compile() {
     fi
 
     ${command} --output-directory="${aux_files_dir}" "${textarget}" &&
-    grep -qi addbibresource "${textarget}" &&
+    grep -qi "addbibresource" "${textarget}" &&
     biber --input-directory="${aux_files_dir}" "${textarget%.*}" &&
     ${command} --output-directory="${aux_files_dir}" "${textarget}" &&
     ${command} --output-directory="${aux_files_dir}" "${textarget}"
