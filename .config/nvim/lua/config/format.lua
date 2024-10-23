@@ -10,6 +10,7 @@ local all_formatters = {
     lua = lua_formatters,
     sh = shell_formatters,
     tex = tex_formatters,
+    latex = tex_formatters,
     bib = tex_formatters,
 }
 

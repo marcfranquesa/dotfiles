@@ -26,6 +26,7 @@ lspconfig.pyright.setup({
 })
 
 lspconfig.texlab.setup({
+    filetypes = { "tex", "plaintex", "bib", "latex" },
     capabilities = capabilities,
 })
 

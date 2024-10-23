@@ -14,7 +14,5 @@ local function set_up_skeleton(pattern, skeleton, line, column)
     })
 end
 
-set_up_skeleton("*.tex", "latex", 29, 1)
-
 set_up_skeleton("*.py", "python", 2, 5)
 set_up_skeleton("pyproject.toml", "pyproject", 1, 1)
