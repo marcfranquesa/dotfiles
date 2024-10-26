@@ -49,7 +49,28 @@ return {
             ]],
             {
                 i(1, "5"),
-                i(2, "name"),
+                i(2, "file"),
+                i(3, "caption"),
+                rep(2),
+            }
+        ),
+        { condition = line_begin }
+    ),
+    -- svg
+    s(
+        { trig = "svg", snippetType = "autosnippet" },
+        fmta(
+            [[
+                \begin{figure}[H]
+                    \centering
+                    \includesvg[width=<>cm]{<>}
+                    \caption{<>}
+                    \label{fig:<>}
+                \end{figure}
+            ]],
+            {
+                i(1, "5"),
+                i(2, "file"),
                 i(3, "caption"),
                 rep(2),
             }

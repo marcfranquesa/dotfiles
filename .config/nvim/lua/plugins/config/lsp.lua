@@ -10,6 +10,10 @@ lspconfig.bashls.setup({
     capabilities = capabilities,
 })
 
+lspconfig.gopls.setup({
+    capabilities = capabilities,
+})
+
 lspconfig.lua_ls.setup({
     capabilities = capabilities,
     settings = {
@@ -25,11 +29,12 @@ lspconfig.pyright.setup({
     capabilities = capabilities,
 })
 
+lspconfig.rust_analyzer.setup({
+    capabilities = capabilities,
+})
+
 lspconfig.texlab.setup({
     filetypes = { "tex", "plaintex", "bib", "latex" },
     capabilities = capabilities,
 })
 
-lspconfig.gopls.setup({
-    capabilities = capabilities,
-})

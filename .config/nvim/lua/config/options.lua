@@ -21,3 +21,12 @@ local options = {
 for k, v in pairs(options) do
     vim.opt[k] = v
 end
+
+
+local globals = {
+    tex_flavor = "latex",
+}
+
+for k, v in pairs(globals) do
+    vim.g[k] = v
+end

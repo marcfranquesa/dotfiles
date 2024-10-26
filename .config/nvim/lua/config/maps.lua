@@ -12,7 +12,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- map("n", ";", ":", { silent = false }) -- semicolon to enter command mode
-map("n", "-", "<cmd>Ex<cr>") -- netrw
+map("n", "-", "<cmd>Explore<cr>") -- netrw
 map("n", "U", "<C-r>") -- redo
 
 map("n", "`", "<Nop>") -- ignore `, only jump to markers with '
@@ -39,7 +39,6 @@ map("n", "<leader>se", ":setlocal spell spelllang=en_us<cr>") -- english
 map("n", "<leader>ss", ":setlocal spell spelllang=es<cr>") -- spanish
 map("n", "<leader>sc", ":setlocal spell spelllang=ca<cr>") -- catalan
 map("n", "<leader>sn", ":setlocal nospell<cr>") -- toggle off
-
 
 -- lsp maps
 vim.api.nvim_create_autocmd("LspAttach", {

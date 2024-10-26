@@ -1,3 +1,5 @@
+vim.wo.spell = true
+
 local function synctex_jump()
     local line = vim.fn.line(".")
     local column = vim.fn.col(".")

@@ -21,8 +21,8 @@ return {
             },
         },
         sections = {
-            lualine_a = { { "branch", icons_enabled = false }, "diagonostics" },
-            lualine_b = { "mode" },
+            lualine_a = { "mode" },
+            lualine_b = { { "branch", icons_enabled = false }, "diagonostics" },
             lualine_c = { "filename" },
             lualine_x = { "diff", "filetype" },
             lualine_y = {},

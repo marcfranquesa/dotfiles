@@ -27,9 +27,10 @@ local netrw_hide = table.concat(regexes, ",")
 
 local netrw_options = {
     netrw_list_hide = netrw_hide,
-    netrw_hide = 1, -- hide files by default
-    netrw_banner = 0, -- hide banner by default
-    netrw_browse_split = 0,
+    netrw_hide = 1, -- hide files by default, toggle with `a`
+    netrw_banner = 0, -- hide banner by default, toggle with `I`
+    netrw_browse_split = 0, -- opening of file
+    netrw_liststyle = 0, -- toggle with `i`
 }
 
 for k, v in pairs(netrw_options) do

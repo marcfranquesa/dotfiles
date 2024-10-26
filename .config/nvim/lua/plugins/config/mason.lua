@@ -1,6 +1,5 @@
 local present1, mason = pcall(require, "mason")
-local present2, mason_lspconfig = pcall(require, "mason-lspconfig")
-if not (present1 or present2) then
+if not present1 then
     return
 end
 
@@ -16,19 +15,16 @@ local mason_ensure_installed = {
     -- linters
     "ruff", -- python
     "selene", -- lua
+    -- lsp
+    "bashls",
+    "gopls",
+    "lua_ls",
+    "pyright",
+    "rust-lang",
+    "texlab",
+    "rust-analyzer",
 }
 vim.api.nvim_create_user_command("MasonInstallAll", function()
     local packages = table.concat(mason_ensure_installed, " ")
     vim.cmd("MasonInstall " .. packages)
 end, {})
-
-mason_lspconfig.setup({
-    ensure_installed = {
-        "bashls",
-        "lua_ls",
-        "pyright",
-        "texlab",
-        "gopls",
-    },
-    automatic_installation = true,
-})
