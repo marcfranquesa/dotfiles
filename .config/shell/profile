@@ -58,7 +58,8 @@ export SQLITE_HISTORY="$XDG_STATE_HOME/sqlite_history"
 export R_LIBS_USER="$XDG_DATA_HOME/R/library"
 
 # defaults
-export EDITOR="nvim"
+export EDITOR="vim"
+command -v nvim > /dev/null && export EDITOR="nvim"
 
 # switch to zsh
 default_shell="$(basename "$SHELL")"
