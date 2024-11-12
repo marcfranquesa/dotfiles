@@ -8,10 +8,20 @@ dir=$(dirname "$file")
 base="${file%.*}"
 
 tex_open(){
-    [ -f "${base}".pdf ] || base="main"
-    setsid -f zathura "${base}".pdf >/dev/null 2>&1 
+    args=""
+
+    # synctex
+    if [ -n "${1}" ]; then
+        line="${1}"
+        column="${2:-1}"
+        args="--synctex-forward=${line}:${column}:${file} ${args}"
+    fi
+
+    [ -f "${base}.pdf" ] || base="main"
+
+    eval setsid -f zathura "${args}""${base}.pdf" >/dev/null 2>&1
 }
 
-case "${*}" in
-    *.tex) tex_open ;;
+case "${ext}" in
+    tex) tex_open "${2}" "${3}";;
 esac

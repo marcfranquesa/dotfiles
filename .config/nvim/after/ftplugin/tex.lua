@@ -4,9 +4,7 @@ local function synctex_jump()
     local line = vim.fn.line(".")
     local column = vim.fn.col(".")
     local file = vim.fn.expand("%")
-    local location = line .. ":" .. column .. ":" .. file .. " main.pdf"
-
-    vim.cmd(":silent !zathura --synctex-forward " .. location)
+    vim.cmd(":silent !open-compiled " .. file .. " " .. line .. " " .. column)
 end
 
 vim.api.nvim_create_user_command("SynctexJump", synctex_jump, {})
