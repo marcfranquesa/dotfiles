@@ -16,11 +16,10 @@ local mason_ensure_installed = {
     "ruff", -- python
     "selene", -- lua
     -- lsp
-    "bashls",
+    "bash-language-server",
     "gopls",
-    "lua_ls",
+    "lua-language-server",
     "pyright",
-    "rust-lang",
     "texlab",
     "rust-analyzer",
 }

@@ -9,6 +9,8 @@ return {
             "gomod",
             "gowork",
             "gosum",
+            "html",
+            "javascript",
             "latex",
             "lua",
             "markdown",
