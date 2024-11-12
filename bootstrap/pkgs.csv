@@ -1,5 +1,8 @@
 NAME,DESCRIPTION
 biber,Backend processor for BibLaTeX
+colima,VM and engine for containers on macOS
+docker,Container runtime
+docker-compose,Docker plugin to run multi-container applications
 fzf,Fuzzy finder
 go,Statically typed and compiled high-level programming language
 neovim,Fork of vim with useful features

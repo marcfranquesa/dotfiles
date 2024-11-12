@@ -34,3 +34,5 @@ test*
 # config
 jupyter
 htop
+docker
+colima
