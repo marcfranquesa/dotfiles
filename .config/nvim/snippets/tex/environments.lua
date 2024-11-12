@@ -40,7 +40,7 @@ return {
         { trig = "fig", snippetType = "autosnippet" },
         fmta(
             [[
-                \begin{figure}[H]
+                \begin{figure}[h!]
                     \centering
                     \includegraphics[width=<>cm]{<>}
                     \caption{<>}
@@ -52,6 +52,38 @@ return {
                 i(2, "file"),
                 i(3, "caption"),
                 rep(2),
+            }
+        ),
+        { condition = line_begin }
+    ),
+    -- 2 figures
+    s(
+        { trig = "2fig", snippetType = "autosnippet" },
+        fmta(
+            [[
+                \begin{figure}[h!]
+                    \centering
+                    \begin{minipage}{.5\textwidth}
+                        \centering
+                        \includegraphics[width=\linewidth]{<>}
+                        \caption{<>}
+                        \label{fig:<>}
+                    \end{minipage}%
+                    \begin{minipage}{.5\textwidth}
+                        \centering
+                        \includegraphics[width=\linewidth]{<>}
+                        \caption{<>}
+                        \label{fig:<>}
+                    \end{minipage}
+                \end{figure}
+            ]],
+            {
+                i(1, "file1"),
+                i(2, "caption1"),
+                rep(1),
+                i(3, "file2"),
+                i(4, "caption2"),
+                rep(3),
             }
         ),
         { condition = line_begin }

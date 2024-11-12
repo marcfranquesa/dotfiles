@@ -21,8 +21,4 @@ return {
             d(1, get_visual),
         })
     ),
-    -- reference
-    s({ trig = "ref", snippetType = "autosnippet" }, fmta("\\ref{<>}", { i(1) })),
-    -- cite
-    s({ trig = "cite", snippetType = "autosnippet" }, fmta("\\cite{<>}", { i(1) })),
 }
