@@ -1,0 +1,13 @@
+#!/bin/sh
+
+base_session="main"
+
+command -v tmux >/dev/null || exit 1
+
+[ -z "$TMUX" ] || exit 0
+
+if tmux has-session -t "${base_session}" 2>/dev/null; then
+    tmux attach-session -t "${base_session}"
+else
+    tmux new-session -s "${base_session}"
+fi

@@ -19,9 +19,10 @@ SAVEHIST=10000000
 setopt hist_ignore_all_dups
 setopt hist_find_no_dups
 
-# load prompt and aliases
+# load prompt, aliases, functions
 [ -f "$ZDOTDIR/prompt" ] && source "$ZDOTDIR/prompt"
 [ -f "$XDG_CONFIG_HOME/shell/aliases" ] && source "$XDG_CONFIG_HOME/shell/aliases"
+[ -f "$XDG_CONFIG_HOME/shell/functions" ] && source "$XDG_CONFIG_HOME/shell/functions"
 
 # basic auto/tab complete
 fpath=($fpath "$XDG_CONFIG_HOME/zsh/completions") # custom completions
@@ -45,3 +46,5 @@ bindkey -v '^?' backward-delete-char
 bindkey '^R' history-incremental-search-backward
 command -v tmux-sessionizer > /dev/null && bindkey -s '^F' "tmux-sessionizer^M"
 
+# init tmux
+command -v tmux-init > /dev/null && tmux-init
