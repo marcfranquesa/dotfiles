@@ -23,10 +23,10 @@ tex_compile() {
         aux_files_dir="${dir}"
     fi
 
-    ${command} --output-directory="${aux_files_dir}" "${textarget}" &&
+    ${command} --output-directory="${aux_files_dir}" "${textarget}"
     grep -qi "addbibresource" "${textarget}" &&
     biber --input-directory="${aux_files_dir}" "${textarget%.*}" &&
-    ${command} --output-directory="${aux_files_dir}" "${textarget}" &&
+    ${command} --output-directory="${aux_files_dir}" "${textarget}"
     ${command} --output-directory="${aux_files_dir}" "${textarget}"
 }
 
