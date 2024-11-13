@@ -14,8 +14,15 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
 
-export XDG_DOWNLOAD_DIR="$HOME/downloads"
 export XDG_DESKTOP_DIR="$HOME/desktop"
+export XDG_DOCUMENTS_DIR="$HOME/documents"
+export XDG_DOWNLOAD_DIR="$HOME/downloads"
+
+# personal logs
+export LOGS_DIR="$XDG_DOCUMENTS_DIR/logs"
+export JOURNAL_DIR="$LOGS_DIR/journal"
+export CURRENT_JOURNAL_DIR="$JOURNAL_DIR/$(date +'%Y')/$(date +'%B' | tr '[:upper:]' '[:lower:]')"
+export MEETINGS_DIR="$LOGS_DIR/meetings"
 
 # macos config
 [ "$(uname)" = "Darwin" ] && source "$XDG_CONFIG_HOME/shell/macos"
