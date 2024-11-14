@@ -1,12 +1,13 @@
 #compdef tmux-sessionizer
 
 _tmux-sessionizer() {
-  local sessions
+    local sessions
 
-  sessions=($(tmux list-sessions -F "#{session_name}"))
+    sessions=($(tmux list-sessions -F "#{session_name}" 2>/dev/null))
 
-  _arguments \
-    '*:Session name:(${sessions[@]})'
+    _arguments \
+        '1:Session name:(${sessions[@]})' \
+        '*::other:->rest'
 }
 
 _tmux-sessionizer "$@"
