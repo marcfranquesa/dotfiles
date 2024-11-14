@@ -3,10 +3,10 @@
 nfiles=$1
 
 if [ -z "$nfiles" ]; then
-  nfiles=1
+    nfiles=1
 fi
 
-count=$( ls -A "$XDG_DOWNLOAD_DIR" | wc -l | tr -d '[:space:]' )
+count=$(ls -A "$XDG_DOWNLOAD_DIR" | wc -l | tr -d '[:space:]')
 
 if [ "$count" -lt "$nfiles" ]; then
     echo "Only $count files found in $XDG_DOWNLOAD_DIR."
@@ -14,6 +14,6 @@ if [ "$count" -lt "$nfiles" ]; then
 fi
 
 ls -tr "$XDG_DOWNLOAD_DIR" | tail -"$nfiles" | while IFS= read -r file; do
-  mv "$XDG_DOWNLOAD_DIR/$file" .
-  echo "$file"
+    mv "$XDG_DOWNLOAD_DIR/$file" .
+    echo "$file"
 done

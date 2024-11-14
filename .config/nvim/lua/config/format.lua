@@ -2,7 +2,7 @@ local method = ":silent !"
 
 local python_formatters = { "black", "isort" }
 local lua_formatters = { "stylua --indent-type Spaces --indent-width 4 --sort-requires" }
-local shell_formatters = { "shfmt" }
+local shell_formatters = { "shfmt -w -i 4 -ci" }
 local tex_formatters = { "tex-fmt --tab 4" }
 
 local all_formatters = {

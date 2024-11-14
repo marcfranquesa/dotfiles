@@ -7,7 +7,7 @@ ext="${file##*.}"
 dir=$(dirname "$file")
 base="${file%.*}"
 
-tex_open(){
+tex_open() {
     args=""
 
     # synctex
@@ -23,5 +23,5 @@ tex_open(){
 }
 
 case "${ext}" in
-    tex) tex_open "${2}" "${3}";;
+    tex) tex_open "${2}" "${3}" ;;
 esac

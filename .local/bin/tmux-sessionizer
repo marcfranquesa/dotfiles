@@ -1,20 +1,24 @@
 #!/bin/sh
 
-command -v tmux > /dev/null || { echo "tmux is not present"; exit 1; }
+command -v tmux >/dev/null || {
+    echo "tmux is not present"
+    exit 1
+}
 
 if [ $# -eq 1 ]; then
     session=$1
 else
-    command -v fzf > /dev/null || { echo "Usage: $0 <session_name>"; exit 1; }
+    command -v fzf >/dev/null || {
+        echo "Usage: $0 <session_name>"
+        exit 1
+    }
     session=$(tmux list-sessions -F "#{session_name}" | fzf)
 fi
 
 if ! tmux has-session -t "$session" 2>/dev/null; then
-    [ -z "$TMUX" ] && tmux new-session -s "$session" && exit 0
     tmux new-session -ds "$session"
 fi
 
 [ -z "$TMUX" ] && tmux attach-session -t "$session" && exit 0
 
 tmux switch-client -t "$session"
-

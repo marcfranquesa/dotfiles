@@ -11,7 +11,6 @@ if [ -f "makefile" ] || [ -f "Makefile" ]; then
     make && exit 0
 fi
 
-
 tex_compile() {
     command="pdflatex -shell-escape -synctex=1"
     aux_files_dir="."
@@ -25,11 +24,10 @@ tex_compile() {
 
     ${command} --output-directory="${aux_files_dir}" "${textarget}"
     grep -qi "addbibresource" "${textarget}" &&
-    biber --input-directory="${aux_files_dir}" "${textarget%.*}" &&
-    ${command} --output-directory="${aux_files_dir}" "${textarget}"
+        biber --input-directory="${aux_files_dir}" "${textarget%.*}" &&
+        ${command} --output-directory="${aux_files_dir}" "${textarget}"
     ${command} --output-directory="${aux_files_dir}" "${textarget}"
 }
-
 
 py_run() {
     command="python"
@@ -37,7 +35,6 @@ py_run() {
 
     ${command} "${file}"
 }
-
 
 case "$ext" in
     py) py_run ;;
