@@ -20,12 +20,19 @@ return {
                 % stop autoindenting
                 \usepackage{parskip}
 
+                % language
+                %   english
+                %   spanish
+                %   catalan
+                \usepackage{csquotes}
+                \usepackage[<>]{babel}
+
                 \usepackage{fancyhdr}
                 \pagestyle{fancy}
                 \fancyhf{}
                 \fancyhead[R]{}
                 \fancyhead[L]{}
-                \fancyfoot[C]{Page \thepage}
+                \fancyfoot[C]{\thepage}
 
                 \author{Marc Franquesa Monés}
                 \title{<>}
@@ -40,9 +47,10 @@ return {
                 \end{document}
             ]],
             {
-                i(1, "Title"),
-                i(2, "\\today"),
-                i(3),
+                i(1, "english"),
+                i(2, "Title"),
+                i(3, "\\today"),
+                i(4),
             }
         ),
         {}

@@ -5,7 +5,7 @@ local in_text = ts_helpers.in_text
 local in_math = ts_helpers.in_math
 
 return {
-    s({ trig = "$", snippetType = "autosnippet" }, fmta([[$ <> $]], { i(1) })),
+    s({ trig = "mm", snippetType = "autosnippet" }, fmta([[$ <> $]], { i(1) })),
     s(
         { trig = "\\[", snippetType = "autosnippet" },
         fmta(
@@ -29,6 +29,14 @@ return {
     s(
         { trig = "sum", snippetType = "autosnippet" },
         fmta([[\sum_{<>}^{<>}]], {
+            i(1, "n = 1"),
+            i(2, "\\infty"),
+        }),
+        { condition = in_math }
+    ),
+    s(
+        { trig = "prod", snippetType = "autosnippet" },
+        fmta([[\prod_{<>}^{<>}]], {
             i(1, "n = 1"),
             i(2, "\\infty"),
         }),

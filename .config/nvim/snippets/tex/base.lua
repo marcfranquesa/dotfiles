@@ -12,13 +12,30 @@ return {
     -- subsubsection
     s({ trig = "h3", snippetType = "autosnippet" }, fmta("\\subsubsection{<>}", { i(1) }), { condition = line_begin }),
     -- new item
-    s({ trig = "ii", snippetType = "autosnippet" }, { t("\\item ") }, { condition = line_begin }),
+    s({ trig = "tt", snippetType = "autosnippet" }, { t("\\item ") }, { condition = line_begin }),
     -- link
     s(
-        { trig = "href", snippetType = "autosnippet" },
+        { trig = "url", snippetType = "autosnippet" },
         fmta([[\href{<>}{<>}]], {
             f(clipboard_content, {}),
             d(1, get_visual),
         })
+    ),
+    -- references
+    s(
+        { trig = "ref", snippetType = "autosnippet" },
+        fmta(
+            [[
+                \usepackage[backend=biber,style=numeric]{biblatex}
+                \addbibresource{<>}
+
+                % prints references, place inside document
+                % \printbibliography[heading=bibintoc]
+            ]],
+            {
+                i(1, "refs.bib"),
+            }
+        ),
+        { condition = line_begin }
     ),
 }

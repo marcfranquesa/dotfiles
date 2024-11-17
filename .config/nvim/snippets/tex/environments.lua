@@ -4,22 +4,6 @@ local line_begin = require("luasnip.extras.expand_conditions").line_begin
 return {
     -- generic
     s(
-        { trig = "\\begin{", snippetType = "autosnippet" },
-        fmta(
-            [[
-                \begin{<>}
-                    <>
-                \end{<>}
-            ]],
-            {
-                i(1),
-                i(2),
-                rep(1),
-            }
-        ),
-        { condition = line_begin }
-    ),
-    s(
         { trig = "beg", snippetType = "autosnippet" },
         fmta(
             [[
@@ -93,7 +77,7 @@ return {
         { trig = "svg", snippetType = "autosnippet" },
         fmta(
             [[
-                \begin{figure}[H]
+                \begin{figure}[h!]
                     \centering
                     \includesvg[width=<>cm]{<>}
                     \caption{<>}
