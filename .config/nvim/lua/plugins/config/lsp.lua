@@ -37,3 +37,8 @@ lspconfig.texlab.setup({
     filetypes = { "tex", "plaintex", "bib", "latex" },
     capabilities = capabilities,
 })
+
+lspconfig.ts_ls.setup({
+    capabilities = capabilities,
+})
+

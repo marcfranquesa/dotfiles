@@ -25,12 +25,6 @@ map("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 map("n", "<C-d>", "<C-d>zz") -- center when jumping around
 map("n", "<C-u>", "<C-u>zz") -- center when jumping around
 
-map("n", "<leader>w", "<cmd>w!<cr>") -- write buffer
-
-map("n", "<leader>bd", "<cmd>bdelete<cr>") -- delete buffer
-map("n", "<leader>bn", "<cmd>bnext<cr>") -- move to next buffer
-map("n", "<leader>bp", "<cmd>bprevious<cr>") -- move to previous buffer
-
 map("n", "<leader>c", ":w! | :AsyncRun compile '<c-r>=expand(\"%:~:.\")<cr>'<cr>") -- compile/run
 map("n", "<leader>o", ":!open-compiled <c-r>%<cr><cr>") -- open compiled
 

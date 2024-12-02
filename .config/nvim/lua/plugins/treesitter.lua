@@ -19,6 +19,7 @@ return {
             "regex",
             "rust",
             "toml",
+            "typescript",
             "xml",
         },
         indent = { enable = true },

@@ -2,6 +2,8 @@
 size = 10.0
 normal = { family = "JetBrainsMonoNL Nerd Font Mono", style = "Regular" }
 
+# [window]
+# opacity = 0.8
 
 [colors.primary]
 background = "#24273a"

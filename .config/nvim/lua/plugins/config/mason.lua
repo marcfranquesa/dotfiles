@@ -20,8 +20,9 @@ local mason_ensure_installed = {
     "gopls",
     "lua-language-server",
     "pyright",
-    "texlab",
     "rust-analyzer",
+    "texlab",
+    "typescript-language-server",
 }
 vim.api.nvim_create_user_command("MasonInstallAll", function()
     local packages = table.concat(mason_ensure_installed, " ")

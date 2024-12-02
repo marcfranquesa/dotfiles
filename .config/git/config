@@ -1,6 +1,8 @@
 [user]
     email = git@marcfranquesa.com 
-    name = Marc Franquesa
+    name = Marc Franquesa Monés
 [alias]
     co = checkout
     cp = cherry-pick
+[init]
+    defaultBranch = main
