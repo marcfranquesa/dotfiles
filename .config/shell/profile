@@ -3,8 +3,8 @@
 # add `~/.local/bin` to $PATH
 if [ -d "$HOME/.local/bin" ]; then
     case ":$PATH:" in
-        *":$HOME/.local/bin:"*) :;;
-        *) PATH="$HOME/.local/bin:$PATH";;
+        *":$HOME/.local/bin:"*) : ;;
+        *) PATH="$HOME/.local/bin:$PATH" ;;
     esac
 fi
 
@@ -18,14 +18,14 @@ export XDG_DESKTOP_DIR="$HOME/desktop"
 export XDG_DOCUMENTS_DIR="$HOME/documents"
 export XDG_DOWNLOAD_DIR="$HOME/downloads"
 
+# macos config
+[ "$(uname)" = "Darwin" ] && source "$XDG_CONFIG_HOME/shell/macos"
+
 # personal logs
 export LOGS_DIR="$XDG_DOCUMENTS_DIR/logs"
 export JOURNAL_DIR="$LOGS_DIR/journal"
 export CURRENT_JOURNAL_DIR="$JOURNAL_DIR/$(date +'%Y')/$(date +'%B' | tr '[:upper:]' '[:lower:]')"
 export MEETINGS_DIR="$LOGS_DIR/meetings"
-
-# macos config
-[ "$(uname)" = "Darwin" ] && source "$XDG_CONFIG_HOME/shell/macos"
 
 # env variables
 export HISTFILE="$XDG_STATE_HOME/shell_history"
@@ -38,7 +38,7 @@ export TEXMFCONFIG="$XDG_CONFIG_HOME/texlive/texmf-config"
 
 export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
 [ -d $PYENV_ROOT/bin ] && PATH="$PYENV_ROOT/bin:$PATH"
-command -v pyenv > /dev/null && eval "$(pyenv init -)"
+command -v pyenv >/dev/null && eval "$(pyenv init -)"
 
 export PYTHON_HISTORY="$XDG_STATE_HOME/python/history"
 export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME/python"
@@ -71,16 +71,18 @@ export R_LIBS_USER="$XDG_DATA_HOME/R/library"
 
 # defaults
 export EDITOR="vim"
-command -v nvim > /dev/null && export EDITOR="nvim"
+command -v nvim >/dev/null && export EDITOR="nvim"
+
+# init tmux
+command -v tmux-init >/dev/null && tmux-init
 
 # switch to zsh
 default_shell="$(basename "$SHELL")"
 if [ $default_shell != "zsh" ]; then
-    if command -v zsh > /dev/null; then
+    if command -v zsh >/dev/null; then
         echo "Default shell is $default_shell, switching to zsh."
         exec zsh
     else
         echo "Default shell is $default_shell and zsh is not present."
     fi
 fi
-

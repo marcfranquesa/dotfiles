@@ -45,6 +45,3 @@ bindkey -v '^?' backward-delete-char
 # key binds
 bindkey '^R' history-incremental-search-backward
 command -v tmux-sessionizer > /dev/null && bindkey -s '^F' "tmux-sessionizer^M"
-
-# init tmux
-command -v tmux-init > /dev/null && tmux-init
