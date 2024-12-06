@@ -4,8 +4,8 @@ set database sqlite
 set synctex true
 
 # colorscheme
-set recolor true
-set recolor-keephue true
+# set recolor true
+# set recolor-keephue true
 
 set default-fg rgba(202,211,245,1)
 set default-bg rgba(36,39,58,1)
