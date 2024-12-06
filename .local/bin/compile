@@ -29,6 +29,10 @@ tex_compile() {
     ${command} --output-directory="${aux_files_dir}" "${textarget}"
 }
 
+md_compile() {
+    pandoc --highlight-style=kate -s -o "${base}".pdf "${file}"
+}
+
 py_run() {
     command="python"
     [ -f "poetry.lock" ] && command="poetry run ${command}"
@@ -37,6 +41,7 @@ py_run() {
 }
 
 case "$ext" in
+    md) md_compile ;;
     py) py_run ;;
     tex) tex_compile ;;
 esac

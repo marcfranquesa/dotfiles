@@ -7,6 +7,10 @@ ext="${file##*.}"
 dir=$(dirname "$file")
 base="${file%.*}"
 
+md_open() {
+    eval setsid -f zathura "${base}.pdf" >/dev/null 2>&1
+}
+
 tex_open() {
     args=""
 
@@ -23,5 +27,6 @@ tex_open() {
 }
 
 case "${ext}" in
+    md) md_open ;;
     tex) tex_open "${2}" "${3}" ;;
 esac
