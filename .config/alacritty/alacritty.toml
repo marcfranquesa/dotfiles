@@ -2,6 +2,9 @@
 size = 10.0
 normal = { family = "JetBrainsMonoNL Nerd Font Mono", style = "Regular" }
 
+[env]
+TERM = "xterm-256color"
+
 # [window]
 # opacity = 0.8
 
