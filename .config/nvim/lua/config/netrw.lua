@@ -11,6 +11,7 @@ local extensions = {
     "nav",
     [[synctex\.gz]],
     "pdf",
+    "toc",
 }
 for i, value in ipairs(extensions) do
     extensions[i] = [[.*\.]] .. value .. "$"
@@ -20,6 +21,8 @@ local regexes = {
     [[\./$,\.\./$,\.git/$]],
     [[\.DS_Store$]],
     [[\.venv/$]],
+    [[venv/$]],
+    [[svg-inkscape/$]],
     table.concat(extensions, ","),
     vim.fn["netrw_gitignore#Hide"](),
 }

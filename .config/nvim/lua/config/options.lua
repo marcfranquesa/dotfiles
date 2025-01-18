@@ -11,7 +11,7 @@ local options = {
     shiftwidth = 4,
     expandtab = true,
     showmode = false,
-    wrap = false,
+    -- wrap = false,
 
     -- display certain whitespaces differently
     list = true,

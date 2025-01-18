@@ -1,10 +1,10 @@
 #!/bin/sh
 
 # use neovim for vim if present
-command -v nvim > /dev/null && alias vim="nvim"
+command -v nvim >/dev/null && alias vim="nvim"
 
 # sensible defaults
-alias clear="clear -x"
+alias clear='printf "\033[H\033[2J"'
 
 # navigation
 alias ..="cd .."
@@ -26,14 +26,14 @@ alias gl="git pull --prune"
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 
 # tmux
-command -v tmux > /dev/null && alias t="tmux"
-command -v tmux-sessionizer > /dev/null && alias ts="tmux-sessionizer"
+command -v tmux >/dev/null && alias t="tmux"
+command -v tmux-sessionizer >/dev/null && alias ts="tmux-sessionizer"
 
 # wget
-alias wget="wget --hsts-file=$XDG_STATE_HOME/wget-hsts"
+alias wget="wget --hsts-file=${XDG_STATE_HOME}/wget-hsts"
 
 # shortcuts for my logs
 alias daily="vim $(date +"%Y-%m-%d").md"
-alias daily-journal="mkdir -p '$CURRENT_JOURNAL_DIR' && vim $CURRENT_JOURNAL_DIR/$(date +"%Y-%m-%d").md"
+alias daily-journal="mkdir -p '${CURRENT_JOURNAL_DIR}' && cd ${CURRENT_JOURNAL_DIR} && daily"
 alias dj="daily-journal"
-alias meetings="cd '$MEETINGS_DIR'"
+alias meetings="cd '${MEETINGS_DIR}'"

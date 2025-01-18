@@ -26,6 +26,45 @@ return {
             [[
                 \begin{figure}[h!]
                     \centering
+                    <>
+                    \caption{<>}
+                    \label{fig:<>}
+                \end{figure}
+            ]],
+            {
+                i(1),
+                i(2),
+                i(3),
+            }
+        ),
+        { condition = line_begin }
+    ),
+    -- split page
+    s(
+        { trig = "2pg", snippetType = "autosnippet" },
+        fmta(
+            [[
+                \begin{minipage}{.5\textwidth}
+                    <>
+                \end{minipage}%
+                \begin{minipage}{.5\textwidth}
+                    <>
+                \end{minipage}
+            ]],
+            {
+                i(1),
+                i(2),
+            }
+        ),
+        { condition = line_begin }
+    ),
+    -- image
+    s(
+        { trig = "img", snippetType = "autosnippet" },
+        fmta(
+            [[
+                \begin{figure}[h!]
+                    \centering
                     \includegraphics[width=<>cm]{<>}
                     \caption{<>}
                     \label{fig:<>}
@@ -40,9 +79,9 @@ return {
         ),
         { condition = line_begin }
     ),
-    -- 2 figures
+    -- 2 side by side images
     s(
-        { trig = "2fig", snippetType = "autosnippet" },
+        { trig = "2img", snippetType = "autosnippet" },
         fmta(
             [[
                 \begin{figure}[h!]
@@ -125,7 +164,7 @@ return {
     ),
     -- frame
     s(
-        { trig = "frame", snippetType = "autosnippet" },
+        { trig = "frm", snippetType = "autosnippet" },
         fmta(
             [[
                 \begin{frame}{<>}

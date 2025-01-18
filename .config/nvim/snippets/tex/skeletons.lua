@@ -17,8 +17,10 @@ return {
                     top=30mm,
                 }
 
-                % stop autoindenting
-                \usepackage{parskip}
+                \usepackage{graphicx} % images
+                \usepackage{svg} % svgs
+
+                \usepackage{parskip} % stop autoindenting
 
                 % language
                 %   english
