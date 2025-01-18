@@ -1,3 +1,9 @@
 # Marc's dotfiles
 
-Will hopefullly be continuously updated. Please check out [Mathias’s dotfiles](https://github.com/mathiasbynens/dotfiles), [holman's dotfiles](https://github.com/holman/dotfiles) and [venatio's dotfiles](https://github.com/v3natio/halofiles).
+Several configuration files that work on my machine.
+I am conforming to the [XDG Base Directory](https://wiki.archlinux.org/title/XDG_Base_Directory) specification to minimize files in `$HOME`.
+
+![sample](docs/image.png)
+
+## Thanks
+I have taken inspiration at different stages from several people, including [Mathias](https://github.com/mathiasbynens/dotfiles), [holman](https://github.com/holman/dotfiles) and [venatio](https://github.com/v3natio/halofiles).

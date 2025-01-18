@@ -26,4 +26,5 @@ _darcs
 ^/LICENSE.*
 ^/COPYING
 ^/bootstrap/*
+^/docs/*
 \.DS_Store
