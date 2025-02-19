@@ -3,3 +3,7 @@
 cd() {
     builtin cd "$@" && ls
 }
+
+daily() {
+    vim $(date +"%Y-%m-%d").md
+}

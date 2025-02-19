@@ -33,7 +33,6 @@ command -v tmux-sessionizer >/dev/null && alias ts="tmux-sessionizer"
 alias wget="wget --hsts-file=${XDG_STATE_HOME}/wget-hsts"
 
 # shortcuts for my logs
-alias daily="vim $(date +"%Y-%m-%d").md"
 alias daily-journal="mkdir -p '${CURRENT_JOURNAL_DIR}' && cd ${CURRENT_JOURNAL_DIR} && daily"
 alias dj="daily-journal"
 alias meetings="cd '${MEETINGS_DIR}'"
