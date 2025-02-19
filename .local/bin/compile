@@ -12,21 +12,29 @@ if [ -f "makefile" ] || [ -f "Makefile" ]; then
 fi
 
 tex_compile() {
-    command="pdflatex -shell-escape -synctex=1"
     aux_files_dir="."
-
-    if ! grep -qi "documentclass" "${file}" && [ -f "main.tex" ]; then
-        textarget="main.tex"
+    if ! grep -qi "documentclass" "${file}"; then
+        for file in *.tex; do
+            if grep -qi "documentclass" "${file}"; then
+                textarget="${file}"
+                break
+            fi
+        done
+        [ -z "$textarget" ] && textarget="main.tex"
     else
         textarget="${file}"
         aux_files_dir="${dir}"
     fi
 
-    ${command} --output-directory="${aux_files_dir}" "${textarget}"
-    grep -qi "addbibresource" "${textarget}" &&
-        biber --input-directory="${aux_files_dir}" "${textarget%.*}" &&
-        ${command} --output-directory="${aux_files_dir}" "${textarget}"
-    ${command} --output-directory="${aux_files_dir}" "${textarget}"
+    command="pdflatex -shell-escape -synctex=1 --output-directory=${aux_files_dir} ${textarget}"
+
+    ${command}
+    if grep -qiE "addbibresource|bibliography" "${textarget}"; then
+        bibcommand="bibtex"
+        grep -qi "backend=biber" "${textarget}" && bibcommand="biber --input-directory=${aux_files_dir}"
+        ${bibcommand} "${textarget%.*}" && ${command}
+    fi
+    ${command}
 }
 
 md_compile() {

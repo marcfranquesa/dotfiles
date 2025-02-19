@@ -21,7 +21,7 @@ tex_open() {
         args="--synctex-forward=${line}:${column}:${file} ${args}"
     fi
 
-    [ -f "${base}.pdf" ] || base="main"
+    [ -f "${base}.pdf" ] || base=$(ls *.pdf | head -n 1 | sed 's/\.pdf$//')
 
     eval setsid -f zathura "${args}""${base}.pdf" >/dev/null 2>&1
 }
