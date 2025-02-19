@@ -1,0 +1,13 @@
+# editors
+*.swp
+
+# tex
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.gz
+*.pdf
+*(busy)
+
