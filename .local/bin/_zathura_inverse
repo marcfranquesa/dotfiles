@@ -1,0 +1,3 @@
+#!/bin/sh
+
+command nvim --server ${NVIM_SERVER_PIPE} --remote-send ":e +${1} ${2}<CR>"

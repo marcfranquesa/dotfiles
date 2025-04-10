@@ -2,6 +2,7 @@ set database sqlite
 
 # synctex
 set synctex true
+set synctex-editor-command "_zathura_inverse %{line} %{input}"
 
 # colorscheme
 # set recolor true

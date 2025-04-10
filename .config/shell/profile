@@ -70,6 +70,11 @@ export MYSQL_HISTFILE="$XDG_STATE_HOME"/mysql_history
 
 export R_LIBS_USER="$XDG_DATA_HOME/R/library"
 
+# nvim server
+export NVIM_SERVER_DIR="/tmp/nvim"
+mkdir -p ${NVIM_SERVER_DIR}
+export NVIM_SERVER_PIPE="${NVIM_SERVER_DIR}/$(tmux display-message -p '#S-#I-#P').pipe"
+
 # defaults
 export EDITOR="vim"
 command -v nvim >/dev/null && export EDITOR="nvim"
