@@ -194,6 +194,23 @@ return {
         ),
         { condition = line_begin }
     ),
+    -- lemma
+    s(
+        { trig = "lma", snippetType = "autosnippet" },
+        fmta(
+            [[
+                \begin{lemma}{<>}
+                    <>
+                \end{lemma}
+            ]],
+            {
+                i(1, "Title"),
+                i(2),
+            }
+        ),
+        { condition = line_begin }
+    ),
+    -- theorem
     -- proposition
     s(
         { trig = "prop", snippetType = "autosnippet" },

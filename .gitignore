@@ -37,3 +37,6 @@ htop
 docker
 colima
 swiftpm
+uv
+fish
+vim

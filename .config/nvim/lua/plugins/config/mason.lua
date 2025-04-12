@@ -7,13 +7,11 @@ mason.setup()
 
 local mason_ensure_installed = {
     -- formatters
-    "black", -- python
-    "isort", -- python
+    "ruff", -- python
     "shfmt", -- shell
     "stylua", -- lua
     "tex-fmt", -- tex
     -- linters
-    "ruff", -- python
     "selene", -- lua
     -- lsp
     "bash-language-server",

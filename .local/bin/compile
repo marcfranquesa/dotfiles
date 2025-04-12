@@ -26,15 +26,15 @@ tex_compile() {
         aux_files_dir="${dir}"
     fi
 
-    command="pdflatex -shell-escape -synctex=1 --output-directory=${aux_files_dir} ${textarget}"
+    command="pdflatex -shell-escape -synctex=1 --output-directory=${aux_files_dir}"
 
-    ${command}
+    ${command} "-draftmode ${textarget}"
     if grep -qiE "addbibresource|bibliography" "${textarget}"; then
         bibcommand="bibtex"
         grep -qi "backend=biber" "${textarget}" && bibcommand="biber --input-directory=${aux_files_dir}"
-        ${bibcommand} "${textarget%.*}" && ${command}
+        ${bibcommand} "${textarget%.*}" && ${command} "-draftmode"
     fi
-    ${command}
+    ${command} ${textarget}
 }
 
 md_compile() {

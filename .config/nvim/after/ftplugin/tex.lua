@@ -4,7 +4,8 @@ local function synctex_jump()
     local line = vim.fn.line(".")
     local column = vim.fn.col(".")
     local file = vim.fn.expand("%")
-    vim.cmd(":silent !open-compiled " .. file .. " " .. line .. " " .. column)
+    local cmd = ":silent !open-compiled " .. file .. " " .. line .. " " .. column
+    vim.cmd(cmd)
 end
 
 vim.api.nvim_create_user_command("SynctexJump", synctex_jump, {})
