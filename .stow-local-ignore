@@ -22,9 +22,11 @@ _darcs
 .+~          # emacs backup files
 \#.*\#       # emacs autosave files
 
+^/TODO.*
 ^/README.*
 ^/LICENSE.*
 ^/COPYING
 ^/bootstrap/*
 ^/docs/*
 \.DS_Store
+

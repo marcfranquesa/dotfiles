@@ -1,7 +1,9 @@
+.DS_Store
+
 # editors
 *.swp
 
-# tex
+### tex
 *.aux
 *.bbl
 *.blg
@@ -10,4 +12,12 @@
 *.gz
 *.pdf
 *(busy)
+*.dvi
+*.fdb_latexmk
+*.fls
+*.nav
+*.toc
+*.snm
+*.bcf
+*.run.xml
 

@@ -45,15 +45,7 @@ md_compile() {
     pandoc --highlight-style=kate -s -o "${base}".pdf "${file}"
 }
 
-py_run() {
-    command="python"
-    [ -f "poetry.lock" ] && command="poetry run ${command}"
-
-    ${command} "${file}"
-}
-
 case "$ext" in
     md) md_compile ;;
-    py) py_run ;;
     tex|bib|sty) tex_compile ;;
 esac

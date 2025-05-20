@@ -1,0 +1,10 @@
+theme = catppuccin-macchiato
+
+font-family = JetBrainsMonoNL Nerd Font Mono
+font-size = 25
+
+cursor-text = #24273a
+cursor-color = #f4dbd6
+
+confirm-close-surface = false
+quit-after-last-window-closed = true

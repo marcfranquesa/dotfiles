@@ -1,5 +1,6 @@
 NAME,DESCRIPTION
 biber,Backend processor for BibLaTeX
+chafa,Terminal Image Viewer
 colima,VM and engine for containers on macOS
 docker,Container runtime
 docker-compose,Docker plugin to run multi-container applications
@@ -8,8 +9,6 @@ go,Statically typed and compiled high-level programming language
 neovim,Fork of vim with useful features
 node,JavaScript runtime built on V8
 pandoc,Converts most markup formats
-poetry,Manages and installs python package dependencies
-pyenv,Python version management
 ripgrep,Faster grep
 texlive,Distribution for the TeX typesetting system
 tmux,Terminal multiplexer
