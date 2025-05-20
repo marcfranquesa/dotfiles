@@ -1,3 +1,10 @@
 #!/bin/sh
 
-command nvim --server ${NVIM_SERVER_PIPE} --remote-send ":e +${1} ${2}<CR>"
+# script to jump from zathura to the same location in tex files
+# implemented as a script to use environment variables
+
+line=${1}
+file=${2}
+
+# <C-\><C-n> switches Neovim to Normal mode just long enough to execute the next command
+command nvim --server ${NVIM_SERVER_PIPE} --remote-send "<C-\><C-N>:w<CR><C-\><C-N>:edit +${line} ${file}<CR>zz"

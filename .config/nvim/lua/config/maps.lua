@@ -26,7 +26,11 @@ map("n", "<C-d>", "<C-d>zz") -- center when jumping around
 map("n", "<C-u>", "<C-u>zz") -- center when jumping around
 
 map("n", "<leader>c", ":w! | :AsyncRun compile '<c-r>=expand(\"%:~:.\")<cr>'<cr>") -- compile/run
+
 map("n", "<leader>o", ":!open-compiled <c-r>%<cr><cr>") -- open compiled
+
+map("n", "<leader>P", ":w! | :AsyncRun git-auto-update<cr>") -- push
+map("n", "<leader>L", ":w! | :AsyncRun git pull<cr>") -- pull
 
 -- spell check
 map("n", "<leader>se", ":setlocal spell spelllang=en_us<cr>") -- english

@@ -210,10 +210,9 @@ return {
         ),
         { condition = line_begin }
     ),
-    -- theorem
     -- proposition
     s(
-        { trig = "prop", snippetType = "autosnippet" },
+        { trig = "prp", snippetType = "autosnippet" },
         fmta(
             [[
                 \begin{proposition}[<>]
@@ -229,7 +228,7 @@ return {
     ),
     -- proof
     s(
-        { trig = "proof", snippetType = "autosnippet" },
+        { trig = "prf", snippetType = "autosnippet" },
         fmta(
             [[
                 \begin{proof}
@@ -244,7 +243,7 @@ return {
     ),
     -- definition
     s(
-        { trig = "def", snippetType = "autosnippet" },
+        { trig = "dfn", snippetType = "autosnippet" },
         fmta(
             [[
                 \begin{definition}[<>]
@@ -260,7 +259,7 @@ return {
     ),
     -- remark
     s(
-        { trig = "rem", snippetType = "autosnippet" },
+        { trig = "rmk", snippetType = "autosnippet" },
         fmta(
             [[
                 \begin{remark}

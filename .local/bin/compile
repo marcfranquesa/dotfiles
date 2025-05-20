@@ -28,13 +28,17 @@ tex_compile() {
 
     command="pdflatex -shell-escape -synctex=1 --output-directory=${aux_files_dir}"
 
-    ${command} "-draftmode ${textarget}"
+    ${command} "-draftmode" "${textarget}"
     if grep -qiE "addbibresource|bibliography" "${textarget}"; then
         bibcommand="bibtex"
         grep -qi "backend=biber" "${textarget}" && bibcommand="biber --input-directory=${aux_files_dir}"
-        ${bibcommand} "${textarget%.*}" && ${command} "-draftmode"
+        ${bibcommand} "${textarget%.*}" && ${command} "-draftmode" "${textarget}"
     fi
     ${command} ${textarget}
+}
+
+tex_compile_tool() {
+    tectonic --synctex "${file}"
 }
 
 md_compile() {
@@ -51,5 +55,5 @@ py_run() {
 case "$ext" in
     md) md_compile ;;
     py) py_run ;;
-    tex) tex_compile ;;
+    tex|bib|sty) tex_compile ;;
 esac
