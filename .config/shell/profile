@@ -18,6 +18,8 @@ export XDG_DESKTOP_DIR="$HOME/desktop"
 export XDG_DOCUMENTS_DIR="$HOME/documents"
 export XDG_DOWNLOAD_DIR="$HOME/downloads"
 
+export XDG_RUNTIME_DIR="/tmp/user/${USER}"
+
 # macos config
 [ "$(uname)" = "Darwin" ] && source "$XDG_CONFIG_HOME/shell/macos"
 
@@ -63,9 +65,9 @@ export MYSQL_HISTFILE="$XDG_STATE_HOME"/mysql_history
 export R_LIBS_USER="$XDG_DATA_HOME/R/library"
 
 # nvim server
-export NVIM_SERVER_DIR="/tmp/nvim"
-mkdir -p ${NVIM_SERVER_DIR}
-export NVIM_SERVER_PIPE="${NVIM_SERVER_DIR}/$(tmux display-message -p '#S-#I-#P').pipe"
+export NVIM_PIPE_DIR="${XDG_RUNTIME_DIR}/nvim"
+mkdir -p ${NVIM_PIPE_DIR}
+export NVIM_PIPE="${NVIM_PIPE_DIR}/shell-${$}.pipe"
 
 # defaults
 export EDITOR="vim"

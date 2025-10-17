@@ -9,7 +9,7 @@ export SHELL_SESSIONS_DISABLE=1
 export PATH="/opt/homebrew/opt/util-linux/bin:$PATH"
 
 # dbus
-export DBUS_LAUNCHD_SESSION_BUS_SOCKET=/tmp/dbus/$USER.session.usock
+export DBUS_LAUNCHD_SESSION_BUS_SOCKET="${XDG_RUNTIME_DIR}/dbus/$USER.session.usock"
 mkdir -p $(dirname $DBUS_LAUNCHD_SESSION_BUS_SOCKET)
 export DBUS_SESSION_BUS_ADDRESS="unix:path=$DBUS_LAUNCHD_SESSION_BUS_SOCKET"
 alias start-dbus="dbus-daemon --fork --session --address=$DBUS_SESSION_BUS_ADDRESS"
