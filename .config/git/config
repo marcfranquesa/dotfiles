@@ -6,3 +6,5 @@
     cp = cherry-pick
 [init]
     defaultBranch = main
+[diff]
+	tool = vimdiff

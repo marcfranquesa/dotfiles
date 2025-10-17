@@ -1,7 +1,9 @@
 .DS_Store
+GEMINI.md
 
 # editors
 *.swp
+.obsidian
 
 ### tex
 *.aux
@@ -20,4 +22,5 @@
 *.snm
 *.bcf
 *.run.xml
+svg-inkscape/
 
