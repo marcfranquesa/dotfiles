@@ -24,7 +24,7 @@ local regexes = {
     [[venv/$]],
     [[svg-inkscape/$]],
     table.concat(extensions, ","),
-    vim.fn["netrw_gitignore#Hide"](),
+    -- vim.fn["netrw_gitignore#Hide"](),
 }
 local netrw_hide = table.concat(regexes, ",")
 

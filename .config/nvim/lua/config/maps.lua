@@ -34,7 +34,7 @@ map("n", "<leader>L", ":w! | :AsyncRun git pull<cr>") -- pull
 
 -- spell check
 map("n", "<leader>se", ":setlocal spell spelllang=en_us<cr>") -- english
-map("n", "<leader>ss", ":setlocal spell spelllang=es<cr>") -- spanish
+map("n", "<leader>ss", ":setlocal spell spelllang=es_es<cr>") -- spanish
 map("n", "<leader>sc", ":setlocal spell spelllang=ca<cr>") -- catalan
 map("n", "<leader>sn", ":setlocal nospell<cr>") -- toggle off
 
