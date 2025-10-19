@@ -11,3 +11,11 @@
     tool = vimdiff
 [include]
     path = ~/.config/git/local
+[gpg]
+    format = ssh
+[commit]
+    gpgsign = true
+[tag]
+    gpgsign = true
+[gpg "ssh"]
+    allowedSignersFile = ~/.config/git/allowed-signers
