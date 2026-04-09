@@ -1,8 +1,10 @@
 #!/bin/sh
 
 # start neovim with a server
-alias nvim="nvim --listen ${NVIM_PIPE} --remote-silent ${@}"
-command -v nvim >/dev/null && alias vim="nvim"
+if command -v nvim >/dev/null; then
+    alias nvim="nvim --listen ${NVIM_PIPE} --remote-silent ${@}"
+    alias vim="nvim"
+fi
 
 # sensible defaults
 alias clear='printf "\033[H\033[2J"'

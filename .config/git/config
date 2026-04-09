@@ -9,9 +9,5 @@
     defaultBranch = main
 [diff]
     tool = vimdiff
-[gpg]
-    format = ssh
-[commit]
-    gpgsign = true
-[tag]
-    gpgsign = true
+[include]
+    path = ~/.config/git/local

@@ -53,6 +53,11 @@ export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 [ -d $CARGO_HOME/bin ] && PATH="$CARGO_HOME/bin:$PATH"
 
+export PIXI_HOME="$XDG_DATA_HOME/pixi"
+[ -d "$PIXI_HOME/bin" ] && PATH="$PIXI_HOME/bin:$PATH"
+
+export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
+
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
@@ -76,13 +81,15 @@ command -v nvim >/dev/null && export EDITOR="nvim"
 # init tmux
 command -v tmux-init >/dev/null && tmux-init
 
-# switch to zsh
-default_shell="$(basename "$SHELL")"
-if [ $default_shell != "zsh" ]; then
-    if command -v zsh >/dev/null; then
-        echo "Default shell is $default_shell, switching to zsh."
-        exec zsh
-    else
-        echo "Default shell is $default_shell and zsh is not present."
+# switch to zsh (interactive shells only)
+case $- in *i*)
+    default_shell="$(basename "$SHELL")"
+    if [ $default_shell != "zsh" ]; then
+        if command -v zsh >/dev/null; then
+            echo "Default shell is $default_shell, switching to zsh."
+            exec zsh
+        else
+            echo "Default shell is $default_shell and zsh is not present."
+        fi
     fi
-fi
+esac

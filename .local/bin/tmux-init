@@ -6,6 +6,13 @@ command -v tmux >/dev/null || exit 1
 
 [ -z "$TMUX" ] || exit 0
 
+tmux_conf="${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf"
+tmux_f=""
+[ -f "$tmux_conf" ] && tmux_f="-f $tmux_conf"
+
+# start server with config before any other command touches it
+tmux $tmux_f start-server
+
 if tmux has-session -t "${base_session}" 2>/dev/null; then
     tmux attach-session -t "${base_session}"
 else
