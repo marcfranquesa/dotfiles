@@ -81,7 +81,7 @@ backup_path="${backups_path}/${backup}"
 
 tool="cp -r"
 if command -v rsync >/dev/null; then
-    tool="rsync -avPh --delete --exclude={Library,.cache,.keyboards,.Trash,.local,gitclones,playground}"
+    tool="rsync -avPh --delete --exclude={Library,.cache,.keyboards,.Trash,.local,gitclones,playground} --chmod=ugo=rwx"
 fi
 
 echo "\nBacking up '${HOME}' to '${backup_path}'"
@@ -94,5 +94,14 @@ eval ${tool} "${HOME}" "${today_path}"
 
 # copy to latest
 latest_path="${backup_path}/latest"
+latest_path_bak="${backup_path}/latest.bak"
+rm -rf "${latest_path_bak}"
+[ -d "${latest_path}" ] && mv "${latest_path}" "${latest_path_bak}"
 mkdir -p "${latest_path}"
-eval ${tool} "${HOME}" "${latest_path}"
+if eval ${tool} "${HOME}" "${latest_path}"; then
+    rm -rf "${latest_path_bak}"
+else
+    rm -rf "${latest_path}"
+    [ -d "${latest_path_bak}" ] && mv "${latest_path_bak}" "${latest_path}"
+    exit 1
+fi

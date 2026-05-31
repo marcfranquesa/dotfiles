@@ -40,6 +40,17 @@ swiftpm
 uv
 fish
 vim
+rstudio
+jrnl
+newsboat
+gh
+github-copilot
+cursor
+configstore
+browseruse
+mole
 
 # other
 TODO.md
+.nvimlog
+.config/zed/prompts/
