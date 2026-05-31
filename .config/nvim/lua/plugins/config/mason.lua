@@ -21,6 +21,7 @@ local mason_ensure_installed = {
     "rust-analyzer",
     "texlab",
     "typescript-language-server",
+    "tinymist",
 }
 vim.api.nvim_create_user_command("MasonInstallAll", function()
     local packages = table.concat(mason_ensure_installed, " ")

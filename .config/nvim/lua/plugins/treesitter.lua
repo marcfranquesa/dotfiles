@@ -12,6 +12,7 @@ return {
             "html",
             "javascript",
             "latex",
+            "typst",
             "lua",
             "markdown",
             "markdown_inline",
