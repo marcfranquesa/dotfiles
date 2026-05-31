@@ -25,5 +25,4 @@ GEMINI.md
 svg-inkscape/
 
 
-**/.claude/settings.local.json
 .config/git/local

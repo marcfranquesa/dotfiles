@@ -49,8 +49,10 @@ cursor
 configstore
 browseruse
 mole
+claude
 
 # other
 TODO.md
 .nvimlog
 .config/zed/prompts/
+.local/share/claude/
