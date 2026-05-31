@@ -4,14 +4,11 @@
 
 file="${1}"
 
-to_abs_path() {
-    case "$1" in
-    /*) printf "%s\n" "$1" ;;
-    *) printf "%s\n" "$(pwd)/$1" ;;
-    esac
-}
+case "${file}" in
+/*) ;;
+*) file="$(pwd)/${file}" ;;
+esac
 
-file="$(to_abs_path "${file}")"
 ext="${file##*.}"
 dir=$(dirname "$file")
 base="${file%.*}"
@@ -34,10 +31,6 @@ fi
 
 zathura_open() {
     setsid -f zathura "$@" >/dev/null 2>&1
-}
-
-zathura_synctex_open() {
-    setsid -f zathura -x "${synctex_editor}" "$@" >/dev/null 2>&1
 }
 
 find_pdf() {
@@ -69,24 +62,19 @@ find_pdf() {
     return 1
 }
 
-md_open() {
+case "${ext}" in
+md)
     zathura_open "${base}.pdf"
-}
-
-tex_open() {
-    line="${1}"
-    column="${2:-1}"
+    ;;
+tex)
+    line="${2}"
+    column="${3:-1}"
     pdf=$(find_pdf) || exit 1
 
     if [ -n "${line}" ]; then
-        synctex_forward="--synctex-forward=${line}:${column}:${file}"
-        zathura_synctex_open "${synctex_forward}" "${pdf}" || zathura_open "${pdf}"
-        return
+        zathura_open -x "${synctex_editor}" "--synctex-forward=${line}:${column}:${file}" "${pdf}" || zathura_open "${pdf}"
+    else
+        zathura_open -x "${synctex_editor}" "${pdf}" || zathura_open "${pdf}"
     fi
-    zathura_synctex_open "${pdf}" || zathura_open "${pdf}"
-}
-
-case "${ext}" in
-    md) md_open ;;
-    tex) tex_open "${2}" "${3}" ;;
+    ;;
 esac
