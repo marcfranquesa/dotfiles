@@ -1,8 +1,11 @@
 set database sqlite
 
+# copy to clipboard on mac
+set selection-clipboard clipboard
+
 # synctex
 set synctex true
-set synctex-editor-command "_zathura_inverse %{line} %{input}"
+set synctex-editor-command "_zathura_inverse %{line} %{column} %{input}"
 
 # colorscheme
 # set recolor true

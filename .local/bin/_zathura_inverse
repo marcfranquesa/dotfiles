@@ -1,10 +1,164 @@
 #!/bin/sh
 
 # script to jump from zathura to the same location in tex files
-# implemented as a script to use environment variables
 
-line=${1}
-file=${2}
+server_arg=""
+case "${1}" in
+--server=*)
+    server_arg="${1#--server=}"
+    shift
+    ;;
+--server)
+    shift
+    server_arg="${1}"
+    shift
+    ;;
+esac
 
-# <C-\><C-n> switches Neovim to Normal mode just long enough to execute the next command
-command nvim --server "${NVIM_PIPE}" --remote-send "<C-\><C-N>:w<CR><C-\><C-N>:edit +${line} ${file}<CR>zz"
+line="${1:-1}"
+[ "$#" -gt 0 ] && shift
+column=1
+
+is_uint() {
+    case "$1" in
+    "" | *[!0-9]*) return 1 ;;
+    *) return 0 ;;
+    esac
+}
+
+is_int() {
+    case "$1" in
+    -*) is_uint "${1#-}" ;;
+    *) is_uint "$1" ;;
+    esac
+}
+
+# Support both zathura command shapes: line file, or line column file.
+if is_int "${1}"; then
+    column="${1}"
+    shift
+elif [ "${1}" = "%{column}" ]; then
+    shift
+fi
+file="$*"
+
+is_int "${line}" || line=1
+is_int "${column}" || column=1
+[ "${line}" -lt 1 ] && line=1
+[ "${column}" -lt 1 ] && column=1
+
+can_reach_server() {
+    [ -n "$1" ] && command nvim --server "$1" --remote-expr "1" >/dev/null 2>&1
+}
+
+remote_expr() {
+    command nvim --server "$1" --remote-expr "$2" 2>/dev/null
+}
+
+add_candidate() {
+    [ -n "$1" ] || return
+    [ -S "$1" ] || return
+    case " ${candidates} " in
+    *" $1 "*) ;;
+    *) candidates="${candidates} $1" ;;
+    esac
+}
+
+resolve_path() {
+    case "$1" in
+    /*)
+        if [ -e "$1" ]; then
+            realpath "$1"
+            return
+        fi
+        printf "%s\n" "$1"
+        return
+        ;;
+    esac
+
+    if [ -e "$1" ]; then
+        realpath "$1"
+        return
+    fi
+
+    for candidate in ${candidates}; do
+        cwd=$(remote_expr "${candidate}" "getcwd()")
+        [ -n "${cwd}" ] || continue
+        if [ -e "${cwd}/$1" ]; then
+            realpath "${cwd}/$1"
+            return
+        fi
+    done
+
+    printf "%s\n" "$1"
+}
+
+server_has_file() {
+    file_for_vim=$(printf "%s" "$2" | sed "s/'/''/g")
+    remote_expr "$1" "len(filter(getbufinfo({'bufloaded': 1}), {_, b -> resolve(fnamemodify(b.name, ':p')) ==# resolve(fnamemodify('${file_for_vim}', ':p'))}))" | grep -qx '[1-9][0-9]*'
+}
+
+server_cwd_contains_file() {
+    cwd=$(remote_expr "$1" "getcwd()")
+    [ -n "${cwd}" ] || return 1
+    case "$2" in
+    "${cwd}" | "${cwd}"/*) return 0 ;;
+    *) return 1 ;;
+    esac
+}
+
+candidates=""
+add_candidate "${server_arg}"
+add_candidate "${NVIM_SERVER}"
+add_candidate "${NVIM}"
+add_candidate "${NVIM_PIPE}"
+
+runtime_dir="${XDG_RUNTIME_DIR:-/tmp/user/${USER}}"
+for candidate in "${runtime_dir}/nvim"/shell-*.pipe "${runtime_dir}"/nvim.*.0 "/tmp"/nvim*/0; do
+    add_candidate "${candidate}"
+done
+
+file=$(resolve_path "${file}")
+
+server=""
+if can_reach_server "${server_arg}"; then
+    server="${server_arg}"
+elif can_reach_server "${NVIM_SERVER}"; then
+    server="${NVIM_SERVER}"
+else
+    for candidate in ${candidates}; do
+        if can_reach_server "${candidate}"; then
+            server="${candidate}"
+            break
+        fi
+    done
+
+    matched_server=""
+    for candidate in ${candidates}; do
+        if can_reach_server "${candidate}" && server_has_file "${candidate}" "${file}"; then
+            matched_server="${candidate}"
+            break
+        fi
+    done
+
+    if [ -n "${matched_server}" ]; then
+        server="${matched_server}"
+    elif [ -n "${file}" ]; then
+        for candidate in ${candidates}; do
+            if can_reach_server "${candidate}" && server_cwd_contains_file "${candidate}" "${file}"; then
+                server="${candidate}"
+                break
+            fi
+        done
+    fi
+fi
+
+[ -n "${file}" ] || exit 1
+[ -n "${server}" ] || exit 1
+
+file_escaped=$(printf "%s" "${file}" | sed "s/'/''/g")
+
+command nvim --server "${server}" --remote-expr "execute('silent! wall')" >/dev/null 2>&1
+command nvim --server "${server}" --remote-expr "execute('edit +' . ${line} . ' ' . fnameescape('${file_escaped}'))" >/dev/null 2>&1 || exit 1
+command nvim --server "${server}" --remote-expr "cursor(${line}, ${column})" >/dev/null 2>&1 || exit 1
+command nvim --server "${server}" --remote-expr "execute('normal! zz')" >/dev/null 2>&1 || exit 1

@@ -3,27 +3,87 @@
 # back-end script that opens a compiled file
 
 file="${1}"
+
+to_abs_path() {
+    case "$1" in
+    /*) printf "%s\n" "$1" ;;
+    *) printf "%s\n" "$(pwd)/$1" ;;
+    esac
+}
+
+file="$(to_abs_path "${file}")"
 ext="${file##*.}"
 dir=$(dirname "$file")
 base="${file%.*}"
+synctex_editor="_zathura_inverse %{line} %{column} %{input}"
+
+if [ -n "${NVIM_SERVER}" ]; then
+    synctex_editor="_zathura_inverse --server=${NVIM_SERVER} %{line} %{column} %{input}"
+fi
+
+if command -v launchctl >/dev/null 2>&1; then
+    dbus_socket=$(launchctl getenv DBUS_LAUNCHD_SESSION_BUS_SOCKET 2>/dev/null)
+    if [ -z "${dbus_socket}" ]; then
+        dbus_socket=$(launchctl asuser "$(id -u)" launchctl getenv DBUS_LAUNCHD_SESSION_BUS_SOCKET 2>/dev/null)
+    fi
+    if [ -n "${dbus_socket}" ]; then
+        export DBUS_LAUNCHD_SESSION_BUS_SOCKET="${dbus_socket}"
+        export DBUS_SESSION_BUS_ADDRESS="unix:path=${dbus_socket}"
+    fi
+fi
+
+zathura_open() {
+    setsid -f zathura "$@" >/dev/null 2>&1
+}
+
+zathura_synctex_open() {
+    setsid -f zathura -x "${synctex_editor}" "$@" >/dev/null 2>&1
+}
+
+find_pdf() {
+    wanted="${base}.pdf"
+    if [ -f "${wanted}" ]; then
+        printf "%s\n" "${wanted}"
+        return 0
+    fi
+
+    search_dir="${dir}"
+    while :; do
+        if [ -f "${search_dir}/main.pdf" ]; then
+            printf "%s\n" "${search_dir}/main.pdf"
+            return 0
+        fi
+
+        set -- "${search_dir}"/*.pdf
+        if [ -e "$1" ]; then
+            printf "%s\n" "$1"
+            return 0
+        fi
+
+        [ "${search_dir}" = "/" ] && break
+        parent_dir=$(dirname "${search_dir}")
+        [ "${parent_dir}" = "${search_dir}" ] && break
+        search_dir="${parent_dir}"
+    done
+
+    return 1
+}
 
 md_open() {
-    eval setsid -f zathura "${base}.pdf" >/dev/null 2>&1
+    zathura_open "${base}.pdf"
 }
 
 tex_open() {
-    args=""
+    line="${1}"
+    column="${2:-1}"
+    pdf=$(find_pdf) || exit 1
 
-    # synctex
-    if [ -n "${1}" ]; then
-        line="${1}"
-        column="${2:-1}"
-        args="--synctex-forward=${line}:${column}:${file} ${args}"
+    if [ -n "${line}" ]; then
+        synctex_forward="--synctex-forward=${line}:${column}:${file}"
+        zathura_synctex_open "${synctex_forward}" "${pdf}" || zathura_open "${pdf}"
+        return
     fi
-
-    [ -f "${base}.pdf" ] || base=$(ls *.pdf | head -n 1 | sed 's/\.pdf$//')
-
-    eval setsid -f zathura "${args}""${base}.pdf" >/dev/null 2>&1
+    zathura_synctex_open "${pdf}" || zathura_open "${pdf}"
 }
 
 case "${ext}" in

@@ -9,8 +9,9 @@ export SHELL_SESSIONS_DISABLE=1
 export PATH="/opt/homebrew/opt/util-linux/bin:$PATH"
 
 # dbus
-export DBUS_LAUNCHD_SESSION_BUS_SOCKET="${XDG_RUNTIME_DIR}/dbus/$USER.session.usock"
-mkdir -p $(dirname $DBUS_LAUNCHD_SESSION_BUS_SOCKET)
-export DBUS_SESSION_BUS_ADDRESS="unix:path=$DBUS_LAUNCHD_SESSION_BUS_SOCKET"
-alias start-dbus="dbus-daemon --fork --session --address=$DBUS_SESSION_BUS_ADDRESS"
-alias kill-dbus="killall dbus-daemon"
+dbus_socket="$(launchctl getenv DBUS_LAUNCHD_SESSION_BUS_SOCKET 2>/dev/null)"
+[ -z "$dbus_socket" ] && dbus_socket="$(launchctl asuser "$(id -u)" launchctl getenv DBUS_LAUNCHD_SESSION_BUS_SOCKET 2>/dev/null)"
+[ -n "$dbus_socket" ] && export DBUS_LAUNCHD_SESSION_BUS_SOCKET="$dbus_socket"
+[ -n "$dbus_socket" ] && export DBUS_SESSION_BUS_ADDRESS="unix:path=$dbus_socket"
+alias start-dbus='launchctl bootstrap gui/$(id -u) "$HOME/Library/LaunchAgents/org.freedesktop.dbus-session.plist" 2>/dev/null || launchctl kickstart -k gui/$(id -u)/org.freedesktop.dbus-session'
+alias kill-dbus='launchctl bootout gui/$(id -u)/org.freedesktop.dbus-session'
