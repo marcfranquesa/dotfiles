@@ -1,4 +1,5 @@
-theme = catppuccin-macchiato
+theme = light:catppuccin-latte,dark:catppuccin-macchiato
+window-theme = dark
 
 font-family = JetBrainsMonoNL Nerd Font Mono
 font-size = 25

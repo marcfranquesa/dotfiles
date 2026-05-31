@@ -69,6 +69,9 @@ export MYSQL_HISTFILE="$XDG_STATE_HOME"/mysql_history
 
 export R_LIBS_USER="$XDG_DATA_HOME/R/library"
 
+export BUN_INSTALL="$XDG_DATA_HOME/bun"
+[ -d "$BUN_INSTALL/bin" ] && PATH="$BUN_INSTALL/bin:$PATH"
+
 # nvim server
 export NVIM_PIPE_DIR="${XDG_RUNTIME_DIR}/nvim"
 mkdir -p ${NVIM_PIPE_DIR}
@@ -84,7 +87,7 @@ command -v tmux-init >/dev/null && tmux-init
 # switch to zsh (interactive shells only)
 case $- in *i*)
     default_shell="$(basename "$SHELL")"
-    if [ $default_shell != "zsh" ]; then
+    if [ "$default_shell" != "zsh" ]; then
         if command -v zsh >/dev/null; then
             echo "Default shell is $default_shell, switching to zsh."
             exec zsh
