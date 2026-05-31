@@ -1,0 +1,25 @@
+{
+  "name": "research-slides",
+  "version": "1.0.3",
+  "description": "Interactive LaTeX Beamer slide generation for research presentations with visual QA",
+  "keywords": ["latex", "beamer", "slides", "research", "presentation"],
+  "skills": "./skills/",
+  "agents": [
+    "./agents/slide-creator.md",
+    "./agents/slide-reviewer.md"
+  ],
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/check-dashes.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "research-posters",
+  "version": "1.0.0",
+  "description": "Interactive LaTeX Beamer poster generation with compile -> PNG -> visual QA loop",
+  "keywords": ["latex", "beamer", "beamerposter", "poster", "research"],
+  "skills": "./skills/",
+  "agents": [
+    "./agents/poster-creator.md",
+    "./agents/poster-reviewer.md"
+  ],
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/check-dashes.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

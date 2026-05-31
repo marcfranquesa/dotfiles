@@ -1,0 +1,20 @@
+{
+  "name": "personal",
+  "owner": {
+    "name": "Marc Franquesa Monés"
+  },
+  "plugins": [
+    {
+      "name": "research-slides",
+      "source": "./research-slides",
+      "description": "Interactive LaTeX Beamer slide generation for research presentations with visual QA",
+      "version": "1.0.3"
+    },
+    {
+      "name": "research-posters",
+      "source": "./research-posters",
+      "description": "Interactive LaTeX Beamer poster generation with compile -> PNG -> visual QA loop",
+      "version": "1.0.0"
+    }
+  ]
+}
