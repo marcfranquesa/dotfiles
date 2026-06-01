@@ -62,6 +62,14 @@ find_pdf() {
     return 1
 }
 
+ensure_synctex() {
+    synctex="${pdf%.pdf}.synctex.gz"
+    [ -s "${synctex}" ] && [ ! "${synctex}" -ot "${pdf}" ] && return
+    command -v compile >/dev/null 2>&1 || return
+    compile "${file}" >/dev/null 2>&1 || return
+    pdf=$(find_pdf) || exit 1
+}
+
 case "${ext}" in
 md)
     zathura_open "${base}.pdf"
@@ -70,6 +78,7 @@ tex)
     line="${2}"
     column="${3:-1}"
     pdf=$(find_pdf) || exit 1
+    ensure_synctex
 
     if [ -n "${line}" ]; then
         zathura_open -x "${synctex_editor}" "--synctex-forward=${line}:${column}:${file}" "${pdf}" || zathura_open "${pdf}"
