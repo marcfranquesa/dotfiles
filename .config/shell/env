@@ -1,0 +1,86 @@
+#!/bin/sh
+
+path_prepend() {
+    [ -d "$1" ] || return
+    case ":$PATH:" in
+        *":$1:"*) : ;;
+        *) PATH="$1:$PATH" ;;
+    esac
+}
+
+path_prepend "$HOME/.local/bin"
+
+# base directories
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+export XDG_DESKTOP_DIR="$HOME/desktop"
+export XDG_DOCUMENTS_DIR="$HOME/documents"
+export XDG_DOWNLOAD_DIR="$HOME/downloads"
+
+export XDG_RUNTIME_DIR="/tmp/user/${USER}"
+
+# personal logs
+export LOGS_DIR="$XDG_DOCUMENTS_DIR/logs"
+export JOURNAL_DIR="$LOGS_DIR/journal"
+export CURRENT_JOURNAL_DIR="$JOURNAL_DIR/$(date +'%Y')/$(date +'%B' | tr '[:upper:]' '[:lower:]')"
+export MEETINGS_DIR="$LOGS_DIR/meetings"
+
+# env variables
+export HISTFILE="$XDG_STATE_HOME/shell_history"
+
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export BASH_ENV="$XDG_CONFIG_HOME/shell/env"
+export ENV="$XDG_CONFIG_HOME/shell/env"
+
+export TEXMFHOME="$XDG_DATA_HOME/texmf"
+export TEXMFVAR="$XDG_CACHE_HOME/texlive/texmf-var"
+export TEXMFCONFIG="$XDG_CONFIG_HOME/texlive/texmf-config"
+
+export PYTHON_HISTORY="$XDG_STATE_HOME/python/history"
+export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME/python"
+export PYTHONUSERBASE="$XDG_DATA_HOME/python"
+
+export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter"
+
+export IPYTHONDIR="$XDG_CONFIG_HOME/jupyter"
+
+export GOPATH="$XDG_DATA_HOME/go"
+export GOMODCACHE="$XDG_CACHE_HOME/go/mod"
+
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+path_prepend "$CARGO_HOME/bin"
+
+export PIXI_HOME="$XDG_DATA_HOME/pixi"
+path_prepend "$PIXI_HOME/bin"
+
+export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
+
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+export NODE_REPL_HISTORY="$XDG_STATE_HOME/node_repl_history"
+
+export SQLITE_HISTORY="$XDG_STATE_HOME/sqlite_history"
+export PSQL_HISTORY="$XDG_STATE_HOME/psql_history"
+export MYSQL_HISTFILE="$XDG_STATE_HOME/mysql_history"
+
+export R_LIBS_USER="$XDG_DATA_HOME/R/library"
+
+export BUN_INSTALL="$XDG_DATA_HOME/bun"
+path_prepend "$BUN_INSTALL/bin"
+
+export CODEX_HOME="$XDG_CONFIG_HOME/codex"
+export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
+
+# nvim server
+export NVIM_PIPE_DIR="${XDG_RUNTIME_DIR}/nvim"
+export NVIM_PIPE="${NVIM_PIPE_DIR}/shell-${$}.pipe"
+
+# defaults
+export EDITOR="vim"
+command -v nvim >/dev/null && export EDITOR="nvim"
+
+export PATH
+unset -f path_prepend

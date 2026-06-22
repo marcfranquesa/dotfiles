@@ -1,86 +1,12 @@
 #!/bin/sh
 
-# add `~/.local/bin` to $PATH
-if [ -d "$HOME/.local/bin" ]; then
-    case ":$PATH:" in
-        *":$HOME/.local/bin:"*) : ;;
-        *) PATH="$HOME/.local/bin:$PATH" ;;
-    esac
-fi
-
-# base directories
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_STATE_HOME="$HOME/.local/state"
-export XDG_CACHE_HOME="$HOME/.cache"
-
-export XDG_DESKTOP_DIR="$HOME/desktop"
-export XDG_DOCUMENTS_DIR="$HOME/documents"
-export XDG_DOWNLOAD_DIR="$HOME/downloads"
-
-export XDG_RUNTIME_DIR="/tmp/user/${USER}"
+[ -r "$HOME/.config/shell/env" ] && . "$HOME/.config/shell/env"
 
 # macos config
-[ "$(uname)" = "Darwin" ] && source "$XDG_CONFIG_HOME/shell/macos"
-
-# personal logs
-export LOGS_DIR="$XDG_DOCUMENTS_DIR/logs"
-export JOURNAL_DIR="$LOGS_DIR/journal"
-export CURRENT_JOURNAL_DIR="$JOURNAL_DIR/$(date +'%Y')/$(date +'%B' | tr '[:upper:]' '[:lower:]')"
-export MEETINGS_DIR="$LOGS_DIR/meetings"
-
-# env variables
-export HISTFILE="$XDG_STATE_HOME/shell_history"
-
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-
-export TEXMFHOME="$XDG_DATA_HOME/texmf"
-export TEXMFVAR="$XDG_CACHE_HOME/texlive/texmf-var"
-export TEXMFCONFIG="$XDG_CONFIG_HOME/texlive/texmf-config"
-
-export PYTHON_HISTORY="$XDG_STATE_HOME/python/history"
-export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME/python"
-export PYTHONUSERBASE="$XDG_DATA_HOME/python"
-
-export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter"
-
-export IPYTHONDIR="$XDG_CONFIG_HOME/jupyter"
-
-export GOPATH="$XDG_DATA_HOME/go"
-export GOMODCACHE="$XDG_CACHE_HOME/go/mod"
-
-export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
-export CARGO_HOME="$XDG_DATA_HOME/cargo"
-[ -d $CARGO_HOME/bin ] && PATH="$CARGO_HOME/bin:$PATH"
-
-export PIXI_HOME="$XDG_DATA_HOME/pixi"
-[ -d "$PIXI_HOME/bin" ] && PATH="$PIXI_HOME/bin:$PATH"
-
-export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
-
-export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
-export NODE_REPL_HISTORY="$XDG_STATE_HOME/node_repl_history"
-
-export SQLITE_HISTORY="$XDG_STATE_HOME/sqlite_history"
-export PSQL_HISTORY="$XDG_STATE_HOME/psql_history"
-export MYSQL_HISTFILE="$XDG_STATE_HOME"/mysql_history
-
-export R_LIBS_USER="$XDG_DATA_HOME/R/library"
-
-export BUN_INSTALL="$XDG_DATA_HOME/bun"
-[ -d "$BUN_INSTALL/bin" ] && PATH="$BUN_INSTALL/bin:$PATH"
-
-export CODEX_HOME="$XDG_CONFIG_HOME"/codex
-export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME"/claude
+[ "$(uname)" = "Darwin" ] && . "$XDG_CONFIG_HOME/shell/macos"
 
 # nvim server
-export NVIM_PIPE_DIR="${XDG_RUNTIME_DIR}/nvim"
-mkdir -p ${NVIM_PIPE_DIR}
-export NVIM_PIPE="${NVIM_PIPE_DIR}/shell-${$}.pipe"
-
-# defaults
-export EDITOR="vim"
-command -v nvim >/dev/null && export EDITOR="nvim"
+mkdir -p "$NVIM_PIPE_DIR"
 
 # init tmux for interactive terminal logins
 case $- in *i*)
