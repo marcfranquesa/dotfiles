@@ -28,6 +28,13 @@ docs: document commit message style
 fix(tmux): limit auto attach to terminal logins
 ```
 
+## Branch Workspaces
+
+- When asked to work from a branch other than `main`, use a temporary worktree
+  under `/tmp` for that branch.
+- This includes opening, updating, reviewing, or fixing PRs.
+- Keep the main checkout on `main` unless explicitly asked otherwise.
+
 ## Comments
 
 - Prefer clear names and structure over comments.
