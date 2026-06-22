@@ -2,27 +2,10 @@ return {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
-        options = {
-            icons_enabled = true,
-            theme = "auto",
-            component_separators = { left = "", right = "" },
-            section_separators = { left = "", right = "" },
-            disabled_filetypes = {
-                statusline = {},
-                winbar = {},
-            },
-            ignore_focus = {},
-            always_divide_middle = true,
-            globalstatus = false,
-            refresh = {
-                statusline = 1000,
-                tabline = 1000,
-                winbar = 1000,
-            },
-        },
+        options = { theme = "auto", component_separators = "", section_separators = "" },
         sections = {
             lualine_a = { "mode" },
-            lualine_b = { { "branch", icons_enabled = false }, "diagonostics" },
+            lualine_b = { { "branch", icons_enabled = false }, "diagnostics" },
             lualine_c = { "filename" },
             lualine_x = { "diff", "filetype" },
             lualine_y = {},
@@ -36,9 +19,5 @@ return {
             lualine_y = {},
             lualine_z = {},
         },
-        tabline = {},
-        winbar = {},
-        inactive_winbar = {},
-        extensions = {},
     },
 }
