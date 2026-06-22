@@ -35,6 +35,12 @@ fix(tmux): limit auto attach to terminal logins
 - This includes opening, updating, reviewing, or fixing PRs.
 - Keep the main checkout on `main` unless explicitly asked otherwise.
 
+## Pull Requests
+
+- Squash merge PRs.
+- After merging a PR, delete the stale branch from both the remote and local
+  repository.
+
 ## Comments
 
 - Prefer clear names and structure over comments.
