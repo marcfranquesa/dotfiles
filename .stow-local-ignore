@@ -23,10 +23,11 @@ _darcs
 \#.*\#       # emacs autosave files
 
 ^/TODO.*
+^/AGENTS.*
+^/CLAUDE.*
 ^/README.*
 ^/LICENSE.*
 ^/COPYING
 ^/bootstrap/*
 ^/docs/*
 \.DS_Store
-
