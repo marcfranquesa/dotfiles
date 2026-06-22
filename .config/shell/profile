@@ -70,6 +70,9 @@ export R_LIBS_USER="$XDG_DATA_HOME/R/library"
 export BUN_INSTALL="$XDG_DATA_HOME/bun"
 [ -d "$BUN_INSTALL/bin" ] && PATH="$BUN_INSTALL/bin:$PATH"
 
+export CODEX_HOME="$XDG_CONFIG_HOME"/codex
+export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME"/claude
+
 # nvim server
 export NVIM_PIPE_DIR="${XDG_RUNTIME_DIR}/nvim"
 mkdir -p ${NVIM_PIPE_DIR}
