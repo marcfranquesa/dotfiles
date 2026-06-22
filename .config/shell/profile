@@ -79,8 +79,10 @@ export NVIM_PIPE="${NVIM_PIPE_DIR}/shell-${$}.pipe"
 export EDITOR="vim"
 command -v nvim >/dev/null && export EDITOR="nvim"
 
-# init tmux
-command -v tmux-init >/dev/null && tmux-init
+# init tmux for interactive terminal logins
+case $- in *i*)
+    [ -t 0 ] && [ -t 1 ] && command -v tmux-init >/dev/null && tmux-init
+esac
 
 # switch to zsh (interactive shells only)
 case $- in *i*)

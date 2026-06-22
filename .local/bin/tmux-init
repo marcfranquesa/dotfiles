@@ -1,10 +1,11 @@
 #!/bin/sh
 
-base_session="main"
+base_session="home"
 
 command -v tmux >/dev/null || exit 1
 
 [ -z "$TMUX" ] || exit 0
+[ -t 0 ] && [ -t 1 ] || exit 0
 
 tmux_conf="${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf"
 tmux_f=""
