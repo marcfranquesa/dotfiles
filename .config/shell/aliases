@@ -32,6 +32,10 @@ alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C
 command -v tmux >/dev/null && alias t="tmux"
 command -v tmux-sessionizer >/dev/null && alias ts="tmux-sessionizer"
 
+# agent CLIs
+alias cld="claude --dangerously-skip-permissions"
+alias cdx="codex --dangerously-bypass-approvals-and-sandbox"
+
 # wget
 alias wget="wget --hsts-file=${XDG_STATE_HOME}/wget-hsts"
 

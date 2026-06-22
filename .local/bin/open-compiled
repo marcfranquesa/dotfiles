@@ -23,6 +23,10 @@ if command -v launchctl >/dev/null 2>&1; then
     if [ -z "${dbus_socket}" ]; then
         dbus_socket=$(launchctl asuser "$(id -u)" launchctl getenv DBUS_LAUNCHD_SESSION_BUS_SOCKET 2>/dev/null)
     fi
+    if [ -z "${dbus_socket}" ]; then
+        dbus_socket=$(launchctl print "gui/$(id -u)/org.freedesktop.dbus-session" 2>/dev/null |
+            awk '/path = \/var\/run\/com\.apple\.launchd\..*\/unix_domain_listener/ { print $3; exit }')
+    fi
     if [ -n "${dbus_socket}" ]; then
         export DBUS_LAUNCHD_SESSION_BUS_SOCKET="${dbus_socket}"
         export DBUS_SESSION_BUS_ADDRESS="unix:path=${dbus_socket}"

@@ -46,13 +46,14 @@ newsboat
 gh
 github-copilot
 cursor
+zed
 configstore
 browseruse
 mole
 claude
+homebrew
 
 # other
 TODO.md
 .nvimlog
-.config/zed/prompts/
 .local/share/claude/
