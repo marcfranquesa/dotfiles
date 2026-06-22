@@ -23,6 +23,7 @@ test*
 .secret*
 
 # zsh
+.zshenv
 .zprofile
 .zcompdump
 .zsh_sessions
@@ -30,6 +31,9 @@ test*
 
 # bash
 .bash_profile
+
+# sh
+.profile
 
 # config
 jupyter

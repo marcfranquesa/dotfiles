@@ -2,13 +2,19 @@
 
 shell=$(basename "$SHELL")
 profile_path=".config/shell/profile"
+env_path=".config/shell/env"
+
+command -v zsh > /dev/null && ln -sf "$env_path" .zshenv
 
 case "$shell" in
     bash)
-        ln -sf $profile_path .bash_profile
+        ln -sf "$profile_path" .bash_profile
         ;;
     zsh)
-        ln -sf $profile_path .zprofile
+        ln -sf "$profile_path" .zprofile
+        ;;
+    sh)
+        ln -sf "$profile_path" .profile
         ;;
     *)
         echo "Shell $shell is not supported."
