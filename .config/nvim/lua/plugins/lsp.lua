@@ -5,9 +5,11 @@ return {
         require("plugins.config.lsp")
     end,
     dependencies = {
-        "williamboman/mason.nvim",
-        config = function()
-            require("plugins.config.mason")
-        end,
+        {
+            "williamboman/mason.nvim",
+            config = function()
+                require("plugins.config.mason")
+            end,
+        },
     },
 }
