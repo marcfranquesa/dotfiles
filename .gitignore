@@ -58,6 +58,23 @@ claude
 codex
 homebrew
 
+# Shared agent skills
+!.config/agents/
+!.config/agents/skills/
+.config/agents/skills/**
+!.config/agents/skills/committee-style/
+!.config/agents/skills/committee-style/**
+
+# Agent-specific skill links
+!.config/codex/
+.config/codex/**
+!.config/codex/skills/
+!.config/codex/skills/committee-style
+!.config/claude/
+.config/claude/**
+!.config/claude/skills/
+!.config/claude/skills/committee-style
+
 # other
 TODO.md
 .nvimlog
