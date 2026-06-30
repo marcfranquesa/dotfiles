@@ -26,3 +26,5 @@ svg-inkscape/
 
 
 .config/git/local
+
+**/.claude/settings.local.json
