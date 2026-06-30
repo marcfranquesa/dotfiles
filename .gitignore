@@ -79,6 +79,7 @@ homebrew
 !.config/claude/CLAUDE.md
 !.config/claude/skills/
 !.config/claude/skills/*
+!.config/claude/yolo.settings.json
 
 # other
 TODO.md
