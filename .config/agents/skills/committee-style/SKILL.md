@@ -5,116 +5,39 @@ description: Use only when the user explicitly asks for "committee style", "comm
 
 # Committee Style
 
-Use this skill when the user explicitly wants a committee-style review. The point is fresh, independent criticism from multiple agents, not one agent roleplaying several voices.
+Use this skill only for an explicit committee-style request. The point is independent criticism from multiple agents, not one agent roleplaying voices.
 
-## Core Rule
+## Core Contract
 
-Spawn at least five independent subagents. Five is the floor, not the cap.
+Spawn at least five independent subagents. Five is the floor. Scale above five when distinct surfaces or failure modes justify it: 6-8 for medium artifacts, 9-12 for large artifacts, and waves for very large artifacts.
 
-Use more agents when there are real independent surfaces to inspect: paragraphs, sections, files, functions, modules, claims, proofs, experiments, APIs, workflows, audiences, or risk categories.
+Use a hybrid committee: whole-artifact perspective reviewers, slice reviewers for local surfaces, and a holistic reviewer when integration matters. Avoid a role-by-slice cross product unless the user asks or the artifact is tiny and high-stakes.
 
-The main agent coordinates. Subagents critique or inspect. The main agent synthesizes, deduplicates, decides what matters, and applies changes only if the user asked for changes.
+Keep reviewers independent until synthesis. The coordinator deduplicates by root cause, ranks by severity and relevance, and applies changes only if the user asked for changes.
 
 If true subagents are unavailable, say so and run at least five clearly labeled single-agent review passes as a fallback. Do not present that fallback as a real committee.
 
-## Sizing
+## Usage References
 
-- 5 agents: smallest valid committee; short or narrow artifacts only.
-- 6-8 agents: normal for medium drafts, meaningful code changes, plans, or research sections.
-- 9-12 agents: large drafts, full PRs, multi-module code, or technical paper sections.
-- More than 12 agents: allowed for very large artifacts; use review waves with clear scopes.
+Before choosing reviewer roles, read the matching reference file:
 
-Do not stop at five just because five is allowed. Add agents when they cover distinct material or distinct failure modes. Do not add agents whose work would substantially duplicate existing reviewers.
+- writing, prose, docs, memos, grants, or essays: `references/writing.md`;
+- code, PRs, diffs, modules, APIs, tests, or security: `references/code.md`;
+- research, math, technical papers, proofs, experiments, or citations: `references/papers.md`;
+- plans, designs, roadmaps, product proposals, or process proposals: `references/plans-designs.md`.
 
-## Shape
-
-Use a hybrid committee:
-
-- perspective reviewers inspect the whole artifact through different lenses;
-- slice reviewers inspect assigned paragraphs, sections, files, functions, modules, claims, tests, or workflows;
-- holistic reviewers check whether the full artifact works together;
-- the main agent merges the results.
-
-Do not use a full expert-by-paragraph or expert-by-function cross product unless the user explicitly asks or the artifact is tiny and high-stakes.
-
-## Role Menus
-
-For writing:
-
-- formal rigor reviewer;
-- narrative/flow reviewer;
-- technical/content reviewer;
-- local paragraph or section editor;
-- skeptical reader;
-- audience/venue reviewer;
-- holistic editor.
-
-For code:
-
-- correctness/risk reviewer;
-- architecture/API reviewer;
-- test reviewer;
-- security/performance reviewer;
-- partition reviewer for assigned files/functions/modules;
-- simplicity reviewer;
-- holistic integration reviewer.
-
-For research, math, or papers:
-
-- proof/technical checker;
-- framing/novelty reviewer;
-- venue editor, if a target venue is known: fit, standards, editorial framing, acceptance bar;
-- venue reviewer, if a target venue is known: likely reviewer objections, expectations, missing evidence;
-- reader/narrative reviewer;
-- evidence/citation reviewer;
-- local section/theorem/experiment reviewer;
-- skeptical Reviewer 2;
-- holistic argument reviewer.
-
-For plans or designs:
-
-- feasibility reviewer;
-- simplicity/scope reviewer;
-- risk reviewer;
-- user-outcome reviewer;
-- integration/sequencing reviewer;
-- domain reviewer.
+If the task spans domains, read each relevant reference. If no domain fits, use the core workflow without loading extra references.
 
 ## Workflow
 
-1. Identify artifact type, scope, audience, and user goal.
-2. Map the review surfaces: sections, paragraphs, claims, files, functions, tests, proofs, workflows, or risks.
-3. Choose committee size from coverage needs, starting at five and scaling upward.
-4. Spawn reviewers in parallel where possible. Give each one a role, scope, source material, and output format.
-5. Keep reviewers independent until they finish.
-6. Synthesize by root cause, not by reviewer.
-7. Rank findings by severity, confidence, and relevance to the user goal.
-8. If edits are requested, apply the selected fixes and verify.
+1. Identify artifact type, scope, audience, goal, and review surfaces.
+2. Read relevant usage references and choose roles/scopes.
+3. Spawn reviewers in parallel where possible. Give each reviewer a role, scope, source material, and output format.
+4. Ask for concise findings: location, severity, issue, consequence, smallest concrete fix, and confidence.
+5. Synthesize by root cause. Prefer evidence over vote count, keep only decision-relevant disagreements, and discard low-actionability comments.
+6. If edits are requested, apply selected fixes and verify.
 
-## Subagent Output
-
-Ask reviewers for concise actionable findings:
-
-- location;
-- severity: blocker, major, minor, optional;
-- issue;
-- consequence;
-- smallest concrete fix;
-- confidence: high, medium, low.
-
-Tell reviewers not to summarize, praise by default, list generic best practices, or read other reviewers' findings before completing their own pass.
-
-## Synthesis
-
-The main agent must:
-
-- deduplicate by root cause;
-- prefer evidence over vote count;
-- preserve disagreements only when they affect the decision;
-- discard speculative or low-actionability comments;
-- distinguish review opinion from verified facts, tests, logs, renders, citations, or source evidence.
-
-Do not emit duplicate findings for the same bug, the same missing test, or the same underlying API/maintainability issue.
+Tell reviewers not to summarize, praise by default, list generic best practices, or read other reviewers' findings before finishing.
 
 ## Output
 
@@ -126,16 +49,6 @@ Use this structure unless the user asks otherwise:
 4. Recommended or applied changes.
 5. Verification and remaining gaps.
 
-For code, lead with bugs, regressions, risks, and missing tests. For writing, lead with claim-level and structure-level issues before wording polish, and include proposed changes for the important issues.
+Apply domain-specific prioritization from the loaded references before formatting the final output.
 
 Do not include raw subagent transcripts unless asked.
-
-## Guardrails
-
-- Five reviewers is the floor.
-- Scale above five when independent coverage justifies it.
-- Add agents for coverage, not decoration.
-- Keep agents independent until synthesis.
-- Avoid consensus theater; the coordinator decides, not the vote count.
-- Avoid runaway loops: one committee pass plus one final check is enough unless there is a blocker, major disagreement, new evidence, or explicit user request.
-- For code edits, use disjoint write scopes and tell workers not to revert others' changes.
