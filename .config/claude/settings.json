@@ -1,0 +1,19 @@
+{
+  "model": "opus[1m]",
+  "effortLevel": "xhigh",
+  "theme": "auto",
+  "attribution": { "commit": "", "pr": "" },
+  "skipWorkflowUsageWarning": true,
+  "enabledPlugins": {
+    "research-slides@personal": true,
+    "research-posters@personal": true
+  },
+  "extraKnownMarketplaces": {
+    "personal": {
+      "source": {
+        "source": "directory",
+        "path": "/Users/marcfranquesamones/.local/share/claude/plugins"
+      }
+    }
+  }
+}
