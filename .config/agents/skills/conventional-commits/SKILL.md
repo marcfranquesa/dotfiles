@@ -10,9 +10,12 @@ description: Enforce Conventional Commit messages for git commits, message revie
 Use `<type>[optional scope][optional !]: <description>`, with any body or
 footer block after a blank line.
 
-Default to `feat`, `fix`, `docs`, `refactor`, `style`, `test`, `build`, `ci`,
-`chore`, `perf`, or `revert`. Use non-listed types only when local instructions
-define them. `feat` adds capability; `fix` corrects a bug.
+Use common types: `feat` for capability, `fix` for broken behavior, `docs` for
+human-facing docs, `refactor` for behavior-preserving restructuring, `style`
+for formatting, `test` for tests, `build` for build/dependency metadata, `ci`
+for automation, `chore` for housekeeping/scaffolding, `perf` for speed/resource
+use, and `revert` for undoing a prior change. Split unrelated changes;
+otherwise choose the dominant intent, and prefer a specific type over `chore`.
 
 ## Style
 
