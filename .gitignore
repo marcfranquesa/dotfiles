@@ -71,10 +71,12 @@ homebrew
 # Agent-specific skill links
 !.config/codex/
 .config/codex/**
+!.config/codex/AGENTS.md
 !.config/codex/skills/
 !.config/codex/skills/*
 !.config/claude/
 .config/claude/**
+!.config/claude/CLAUDE.md
 !.config/claude/skills/
 !.config/claude/skills/*
 
