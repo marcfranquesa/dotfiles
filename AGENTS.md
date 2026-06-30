@@ -1,32 +1,10 @@
 # Repository Guidance
 
-## Commit Messages
+## Commit Scopes
 
-Use Conventional Commits:
-
-```text
-type(scope): imperative summary
-```
-
-- Use `feat`, `fix`, `docs`, `refactor`, `style`, `test`, `build`, `ci`, or
-  `chore`.
-- Pick one short scope from the touched area, such as `shell`, `git`, `tmux`,
-  `nvim`, `bootstrap`, or `docs`. Omit the scope only when it adds no clarity.
-- Keep `type` and `scope` lower-case. Use `: ` after the scope.
-- Write the summary in imperative mood, lower-case, with no trailing period.
-- Aim for about 50 characters; keep the full subject under 72.
-- Add a blank-line body only when the reason or side effect is not obvious
-  from the diff; wrap body lines at about 72 characters.
-- Keep commits logically separate. If one message needs "and", consider
-  splitting the commit.
-
-Examples:
-
-```text
-chore(shell): set AI config dirs
-docs: document commit message style
-fix(tmux): limit auto attach to terminal logins
-```
+For Conventional Commit scopes in this repo, prefer touched-area names such as
+`shell`, `git`, `tmux`, `nvim`, `bootstrap`, `docs`, or `skills`. Omit the
+scope when it adds no clarity.
 
 ## Branch Workspaces
 
