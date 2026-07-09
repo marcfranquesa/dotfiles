@@ -1,0 +1,25 @@
+# Tracked portable defaults. Keep generated local state out of this file.
+
+model = "gpt-5.5"
+model_reasoning_effort = "xhigh"
+personality = "pragmatic"
+approval_policy = "never"
+sandbox_mode = "danger-full-access"
+service_tier = "default"
+
+[features]
+multi_agent = true
+memories = true
+chronicle = true
+js_repl = false
+
+[agents]
+max_depth = 3
+
+[desktop]
+git-branch-prefix = ""
+git-create-pull-request-as-draft = false
+git-pull-request-merge-method = "squash"
+git-commit-instructions = "Use Conventional Commit style: type(scope): imperative lower-case summary, no assistant branding."
+git-pr-instructions = "Use a Conventional-Commit-style title when appropriate. Do not prefix PR titles with [codex] or other assistant branding."
+followUpQueueMode = "queue"
