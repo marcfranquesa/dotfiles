@@ -10,9 +10,15 @@ projects, prefer `pixi run`.
 
 ## Working Defaults
 
-- Do branch/PR work outside `main` in a temporary `/tmp` worktree; keep the primary checkout on `main` unless told otherwise.
-- Use `/tmp` for temporary repo clones or inspection checkouts, and delete them when done.
-- Prefer clear code over comments; keep comments for why, constraints, or surprising behavior, and update or delete stale comments.
+- Do branch/PR work outside `main` in a temporary `/tmp` worktree; keep the
+  primary checkout on `main` unless told otherwise.
+- Use `/tmp` for temporary repo clones or inspection checkouts, and delete them
+  when done.
+- Prefer clear code over comments; keep comments for why, constraints, or
+  surprising behavior, and update or delete stale comments.
+- For substantial taste-driven work such as websites, visual design, or UX,
+  any non-Fable agent should create a `fable` subagent for critique and
+  iteration when practical.
 
 ## Cross-Model Review
 
