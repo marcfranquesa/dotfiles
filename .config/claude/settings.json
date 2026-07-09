@@ -3,8 +3,9 @@
     "commit": "",
     "pr": ""
   },
-  "model": "opus[1m]",
-  "effortLevel": "xhigh",
+  "effortLevel": "high",
   "skipWorkflowUsageWarning": true,
-  "theme": "auto"
+  "theme": "auto",
+  "switchModelsOnFlag": true,
+  "model": "claude-fable-5[1m]"
 }
