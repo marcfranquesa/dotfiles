@@ -1,6 +1,6 @@
 # Tracked portable defaults. Keep generated local state out of this file.
 
-model = "gpt-5.5"
+model = "gpt-5.6-sol"
 model_reasoning_effort = "xhigh"
 personality = "pragmatic"
 approval_policy = "never"
