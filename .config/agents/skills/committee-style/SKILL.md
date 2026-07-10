@@ -9,13 +9,13 @@ Use this skill only for an explicit committee-style request. The point is indepe
 
 ## Core Contract
 
-Spawn at least five independent subagents. Five is the floor. Scale above five when distinct surfaces or failure modes justify it: 6-8 for medium artifacts, 9-12 for large artifacts, and waves for very large artifacts.
+Complete at least five independent review passes. Five is the floor. Use true subagents where available, but run them in bounded waves instead of assuming all reviewers can be open at once. Close completed agents before starting later waves, and start a fresh reviewer in each freed slot until the floor is met. Scale above five only when distinct surfaces or failure modes justify it: 6-8 for medium artifacts, 9-12 for large artifacts, and multiple waves for very large artifacts.
 
 Use a hybrid committee: whole-artifact perspective reviewers, slice reviewers for local surfaces, and a holistic reviewer when integration matters. Avoid a role-by-slice cross product unless the user asks or the artifact is tiny and high-stakes.
 
 Keep reviewers independent until synthesis. The coordinator deduplicates by root cause, ranks by severity and relevance, and applies changes only if the user asked for changes.
 
-If true subagents are unavailable, say so and run at least five clearly labeled single-agent review passes as a fallback. Do not present that fallback as a real committee.
+If a spawn fails because the runtime is at its concurrent-agent limit, keep the successful reviewers, do local non-overlapping coordination work while they run, then close finished agents and continue the next wave. If true subagents are unavailable at all, say so and run at least five clearly labeled single-agent review passes as a fallback. Do not present that fallback as a real committee.
 
 ## Usage References
 
@@ -32,7 +32,7 @@ If the task spans domains, read each relevant reference. If no domain fits, use 
 
 1. Identify artifact type, scope, audience, goal, and review surfaces.
 2. Read relevant usage references and choose roles/scopes.
-3. Spawn reviewers in parallel where possible. Give each reviewer a role, scope, source material, and output format.
+3. Spawn reviewers in parallel where possible, using bounded waves when slots are limited. Give each reviewer a role, scope, source material, and output format.
 4. Ask for concise findings: location, severity, issue, consequence, smallest concrete fix, and confidence.
 5. Synthesize by root cause. Prefer evidence over vote count, keep only decision-relevant disagreements, and discard low-actionability comments.
 6. If edits are requested, apply selected fixes and verify.

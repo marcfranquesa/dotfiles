@@ -36,7 +36,7 @@ Codex -> Claude:
 ```sh
 claude -p \
   --model fable \
-  --effort high \
+  --effort xhigh \
   --no-session-persistence \
   --permission-mode dontAsk \
   --tools Read,Grep,Glob <<'REVIEW_PROMPT'
