@@ -16,9 +16,28 @@ projects, prefer `pixi run`.
   when done.
 - Prefer clear code over comments; keep comments for why, constraints, or
   surprising behavior, and update or delete stale comments.
-- For substantial taste-driven work such as websites, visual design, or UX,
-  any non-Fable agent should create a `fable` subagent for critique and
-  iteration when practical.
+
+## Model Handoffs
+
+- Hand off a task or subtask when another available model is materially better
+  suited to it. Give the receiving model the artifact, audience, constraints,
+  and success criteria; the primary agent remains responsible for integration,
+  correctness, and verification.
+- For substantial taste-driven visual work—including report and dashboard
+  design, websites, presentations, visual identity, and UX—a non-Fable agent
+  should hand off the design direction and at least one iteration to Fable when
+  practical. Do this early enough for Fable to shape the result, rather than
+  using it only for final review.
+- This does not apply to routine report updates, plain-text summaries, or
+  mechanical styling changes.
+
+Examples:
+
+- For an HTML experiment report, ask Fable to design or refine the information
+  hierarchy, layout, typography, color, and figure presentation. The primary
+  agent should implement it and verify the data and behavior.
+- For a website or UX flow, ask Fable to establish the visual direction and
+  critique rendered screenshots during iteration.
 
 ## Cross-Model Review
 
@@ -36,7 +55,7 @@ Codex -> Claude:
 ```sh
 claude -p \
   --model fable \
-  --effort xhigh \
+  --effort high \
   --no-session-persistence \
   --permission-mode dontAsk \
   --tools Read,Grep,Glob <<'REVIEW_PROMPT'
@@ -50,8 +69,8 @@ Claude Code -> Codex:
 codex -a never exec \
   -s read-only \
   --ephemeral \
-  -m gpt-5.5 \
-  -c 'model_reasoning_effort="xhigh"' \
+  -m gpt-5.6 \
+  -c 'model_reasoning_effort="high"' \
   - <<'REVIEW_PROMPT'
 <review prompt and concise context>
 REVIEW_PROMPT
