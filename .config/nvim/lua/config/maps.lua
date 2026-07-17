@@ -1,11 +1,7 @@
 local map_group = vim.api.nvim_create_augroup("MapGroup", { clear = true })
 
 local function map(mode, lhs, rhs, opts)
-    local options = { noremap = true, silent = true }
-    if opts then
-        options = vim.tbl_extend("force", options, opts)
-    end
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+    vim.keymap.set(mode, lhs, rhs, vim.tbl_extend("force", { silent = true }, opts or {}))
 end
 
 vim.g.mapleader = " "
@@ -41,9 +37,9 @@ map("n", "<leader>sn", ":setlocal nospell<cr>") -- toggle off
 -- lsp maps
 vim.api.nvim_create_autocmd("LspAttach", {
     group = map_group,
-    callback = function()
-        map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>")
-        map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>")
+    callback = function(event)
+        map("n", "gd", vim.lsp.buf.definition, { buffer = event.buf })
+        map("n", "K", vim.lsp.buf.hover, { buffer = event.buf })
         -- map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
     end,
 })
