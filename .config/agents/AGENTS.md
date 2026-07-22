@@ -17,6 +17,17 @@ projects, prefer `pixi run`.
 - Prefer clear code over comments; keep comments for why, constraints, or
   surprising behavior, and update or delete stale comments.
 
+## GitHub Mutation Scope
+
+- Before mutating multiple PRs, issues, branches, or worktrees, resolve their
+  exact identifiers and authors or owners, then state the filtered target set.
+- By default, mutate only PRs and issues authored by `marcfranquesa`, and only
+  branches and worktrees created or actively worked on in the current thread,
+  all within the user's explicit request. Repository or organization ownership,
+  numeric ranges, and words such as "all" do not authorize third-party items.
+- Treat third-party items as read-only unless the user explicitly names the
+  exact item and requested mutation.
+
 ## Model Handoffs
 
 - Hand off a task or subtask when another available model is materially better

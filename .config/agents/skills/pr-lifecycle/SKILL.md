@@ -1,13 +1,19 @@
 ---
-name: pr-merge-cleanup
-description: Use when merging PRs or cleaning stale PR branches/worktrees.
+name: pr-lifecycle
+description: Use when merging, closing, reopening, or retargeting PRs, or cleaning stale PR branches and worktrees.
 ---
 
 ## Rules
 
-- Limit cleanup to PRs, branches, and worktrees created or actively worked on
-  in the current thread. Do not clean up items from other sessions or merely
-  because the user owns them.
+- Before any mutation, resolve the exact item and its author or owner. For batch
+  operations, state the filtered target set before writing.
+- Limit PR and issue mutations to items authored by `marcfranquesa` and within
+  the user's explicit request. Limit branch and worktree mutations to items
+  created or actively worked on in the current thread. Do not infer scope from
+  repository or organization ownership, numeric ranges, or words such as
+  "all".
+- Treat third-party items as read-only unless the user explicitly names the
+  exact item and requested mutation.
 - Squash merge PRs unless the user or repository explicitly requires another
   merge strategy.
 - Before merging after a rebase, force-push, retarget, or similar history
