@@ -10,7 +10,6 @@ return {
                 build = "make",
             },
         },
-        opts = { theme = "auto" },
         keys = {
             { "<leader>/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer search" },
             { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
@@ -28,21 +27,23 @@ return {
         },
         config = function()
             local telescope = require("telescope")
+            local ignore = { "node_modules", ".git", ".venv", "venv", "svg-inkscape" }
+
             telescope.setup({
                 pickers = {
                     live_grep = {
-                        file_ignore_patterns = { "node_modules", ".git", ".venv", "venv", "svg-inkscape" },
+                        file_ignore_patterns = ignore,
                         additional_args = function(_)
                             return { "--hidden" }
                         end,
                     },
                     find_files = {
-                        file_ignore_patterns = { "node_modules", ".git", ".venv", "venv", "svg-inkscape" },
+                        file_ignore_patterns = ignore,
                         hidden = true,
                     },
                 },
                 extensions = {
-                    "fzf",
+                    fzf = {},
                     ["ui-select"] = {
                         require("telescope.themes").get_dropdown({}),
                     },

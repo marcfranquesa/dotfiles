@@ -12,6 +12,7 @@ pandoc,Converts most markup formats
 ripgrep,Faster grep
 texlive,Distribution for the TeX typesetting system
 tmux,Terminal multiplexer
+tree-sitter,Incremental parsing system
 stow,Organize software neatly under a single directory tree
 wget,Retrieves files from web
 zathura,Minimalist document viewer
