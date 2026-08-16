@@ -13,15 +13,17 @@ case $- in *i*)
     [ -t 0 ] && [ -t 1 ] && command -v tmux-init >/dev/null && tmux-init
 esac
 
-# switch to zsh (interactive shells only)
+# switch to zsh for interactive terminal sessions only
 case $- in *i*)
-    default_shell="$(basename "$SHELL")"
-    if [ "$default_shell" != "zsh" ]; then
-        if command -v zsh >/dev/null; then
-            echo "Default shell is $default_shell, switching to zsh."
-            exec zsh
-        else
-            echo "Default shell is $default_shell and zsh is not present."
+    if [ -t 0 ] && [ -t 1 ]; then
+        default_shell="$(basename "$SHELL")"
+        if [ "$default_shell" != "zsh" ]; then
+            if command -v zsh >/dev/null; then
+                echo "Default shell is $default_shell, switching to zsh."
+                exec zsh
+            else
+                echo "Default shell is $default_shell and zsh is not present."
+            fi
         fi
     fi
 esac
