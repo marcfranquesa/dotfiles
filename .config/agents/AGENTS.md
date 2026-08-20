@@ -14,11 +14,21 @@ projects, prefer `pixi run`.
   primary checkout on `main` unless told otherwise.
 - Use `/tmp` for temporary repo clones or inspection checkouts, and delete them
   when done.
-- When asked to share a local document or app on the tailnet, run
-  `tailscale serve --bg <file-or-directory-or-localhost:port>` and return the
-  HTTPS URL printed by the command.
 - Prefer clear code over comments; keep comments for why, constraints, or
   surprising behavior, and update or delete stale comments.
+
+## Tailscale Sharing
+
+To share a file, check `tailscale serve status`, choose a unique URL path, then
+run:
+
+```sh
+sudo -n tailscale serve --bg --set-path="/<name>" <absolute-file>
+```
+
+Report the printed URL. Always use `--set-path`; do not copy or move a file
+solely to serve it, and only expose intended non-sensitive content. For a local
+app, run `tailscale serve --bg localhost:<port>` and report the printed URL.
 
 ## GitHub Mutation Scope
 
