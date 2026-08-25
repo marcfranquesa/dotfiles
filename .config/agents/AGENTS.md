@@ -14,6 +14,9 @@ projects, prefer `pixi run`.
   primary checkout on `main` unless told otherwise.
 - Use `/tmp` for temporary repo clones or inspection checkouts, and delete them
   when done.
+- When asked to serve a website, use hosted Sites by default. If Sites hosting
+  is unavailable or the user explicitly requests Tailscale or the tailnet,
+  follow the Tailscale sharing workflow below.
 - Prefer clear code over comments; keep comments for why, constraints, or
   surprising behavior, and update or delete stale comments.
 
