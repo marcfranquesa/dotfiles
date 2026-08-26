@@ -69,8 +69,8 @@ Examples:
 ## Cross-Model Review
 
 - For non-trivial plans/designs/solutions, or risky or substantial changes, get
-  a read-only second opinion from the other model family before finalizing. Skip
-  if the other CLI is unavailable or blocked.
+  a read-only second opinion from the other model family before finalizing. If
+  unavailable or blocked, use the same model at its highest effort.
 - Use the exact model settings below; do not downgrade them. Pass prompts
   through stdin/heredoc, never shell arguments. Use a delimiter that does not
   appear in the prompt. Provide file paths and a short summary; paste only
