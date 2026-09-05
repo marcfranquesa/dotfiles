@@ -3,6 +3,12 @@
 Several configuration files that work on my machine.
 I am conforming to the [XDG Base Directory](https://wiki.archlinux.org/title/XDG_Base_Directory) specification to minimize files in `$HOME`.
 
+## Private dotfiles
+
+Stow manages this repository. Chezmoi separately manages private configuration
+from `marcfranquesa/dotfiles-private`; do not manage the same file with both tools.
+See [the setup and daily workflow](docs/private-dotfiles.md).
+
 ![sample](docs/image.png)
 
 ## Thanks

@@ -1,0 +1,2 @@
+# Keep runtime state out of the Stow-managed configuration directory.
+persistentState = "~/.local/state/chezmoi/chezmoi.boltdb"

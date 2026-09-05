@@ -84,6 +84,9 @@ homebrew
 !.config/claude/settings.json
 
 # other
+.config/chezmoi/*
+!.config/chezmoi/chezmoi.toml
+.local/share/chezmoi/
 TODO.md
 .nvimlog
 .local/share/claude/

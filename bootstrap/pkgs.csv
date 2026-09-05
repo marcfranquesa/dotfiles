@@ -1,6 +1,7 @@
 NAME,DESCRIPTION
 biber,Backend processor for BibLaTeX
 chafa,Terminal Image Viewer
+chezmoi,Manage private dotfiles across machines
 colima,VM and engine for containers on macOS
 docker,Container runtime
 docker-compose,Docker plugin to run multi-container applications
