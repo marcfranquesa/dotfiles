@@ -29,6 +29,9 @@ done
 # Trackpad
 defaults write NSGlobalDomain com.apple.trackpad.scaling -float 1
 
+# Mouse
+defaults write NSGlobalDomain com.apple.mouse.scaling -float 3
+
 # Finder
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 defaults write com.apple.finder ShowPathbar -bool true
