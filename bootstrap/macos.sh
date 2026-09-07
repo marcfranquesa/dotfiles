@@ -36,4 +36,8 @@ defaults write NSGlobalDomain com.apple.mouse.scaling -float 3
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 defaults write com.apple.finder ShowPathbar -bool true
 
+# Let maximized windows use the space otherwise reserved for the Dock.
+defaults write com.apple.dock autohide -bool true
+killall Dock 2>/dev/null || true
+
 echo "Applied macOS settings. Log out and back in if changes are not visible."
