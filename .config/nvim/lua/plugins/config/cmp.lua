@@ -1,6 +1,6 @@
 local present1, cmp = pcall(require, "cmp")
 local present2, luasnip = pcall(require, "luasnip")
-if not (present1 or present2) then
+if not (present1 and present2) then
     return
 end
 
