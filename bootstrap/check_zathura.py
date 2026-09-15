@@ -99,7 +99,7 @@ class ZathuraWorkflow(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         calls = [json.loads(line) for line in self.log.read_text().splitlines()]
         self.assertEqual(len(calls), 2)
-        self.assertEqual(calls[-1][-1], self.source.name)
+        self.assertEqual(calls[-1][-1], str(self.source))
         self.assertIn('-synctex=1', calls[-1])
         self.log.unlink()
         result = self.call('compile', self.source, VIEWER_EXIT='9')
@@ -107,6 +107,8 @@ class ZathuraWorkflow(unittest.TestCase):
         self.assertEqual(len(self.log.read_text().splitlines()), 1)
 
     def test_bibliography_uses_a_relative_stem(self):
+        self.source = self.project / 'tex/main.tex'
+        self.source.parent.mkdir()
         self.source.write_text('\\documentclass{article}\n\\bibliography{refs}\n')
         for name in ('pdflatex', 'bibtex'):
             tool = self.mockbin / name
@@ -117,7 +119,9 @@ class ZathuraWorkflow(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         calls = [json.loads(line) for line in self.log.read_text().splitlines()]
         bibliography = next(call for call in calls if call[0].endswith('/bibtex'))
-        self.assertEqual(bibliography[1:], [str(self.project), ['main']])
+        self.assertEqual(bibliography[1:], [str(self.source.parent), ['main']])
+        latex = next(call for call in calls if call[0].endswith('/pdflatex'))
+        self.assertEqual(latex[1], str(self.project))
 
     def test_inverse_search_preserves_unsaved_buffers_and_closed_links(self):
         socket = self.root / 'runtime/nvim/shell-test.pipe'

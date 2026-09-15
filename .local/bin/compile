@@ -12,29 +12,32 @@ if [ -f "makefile" ] || [ -f "Makefile" ]; then
 fi
 
 tex_compile() {
+    aux_files_dir="."
     if ! grep -qi "documentclass" "${file}"; then
         for file in *.tex; do
             if grep -qi "documentclass" "${file}"; then
                 textarget="${file}"
+        aux_files_dir=$(dirname "$file")
                 break
             fi
         done
         [ -z "$textarget" ] && textarget="main.tex"
     else
         textarget="${file}"
+        aux_files_dir=$(dirname "$file")
     fi
 
-    # TeX resolves includes here; BibTeX requires a relative output stem.
-    cd "$(dirname "$textarget")" || return
-    textarget=$(basename "$textarget")
-    set -- pdflatex -shell-escape -synctex=1 -interaction=nonstopmode -halt-on-error
+    set -- pdflatex -shell-escape -synctex=1 -interaction=nonstopmode -halt-on-error "--output-directory=${aux_files_dir}"
 
     "$@" -draftmode "${textarget}" || return
     if grep -qiE "addbibresource|bibliography" "${textarget}"; then
         if grep -qi "backend=biber" "${textarget}"; then
-            biber "${textarget%.*}" || return
+            biber "--input-directory=${aux_files_dir}" "${textarget%.*}" || return
         else
-            bibtex "${textarget%.*}" || return
+            # BibTeX rejects absolute output paths; retain project-relative bibliography lookup.
+            build_dir=$(pwd)
+            (cd "$aux_files_dir" && BIBINPUTS="$build_dir:${BIBINPUTS-}" BSTINPUTS="$build_dir:${BSTINPUTS-}" \
+                bibtex "$(basename "${textarget%.*}")") || return
         fi
         "$@" -draftmode "${textarget}" || return
     fi
