@@ -25,10 +25,7 @@ map("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 map("n", "<C-d>", "<C-d>zz") -- center when jumping around
 map("n", "<C-u>", "<C-u>zz") -- center when jumping around
 
-vim.keymap.set("n", "<leader>c", function()
-    vim.cmd.write()
-    vim.cmd("AsyncRun compile " .. vim.fn.shellescape(vim.fn.expand("%:p")))
-end, { silent = true, desc = "Compile current file" })
+map("n", "<leader>c", ":w! | :AsyncRun compile '<c-r>=expand(\"%:~:.\")<cr>'<cr>") -- compile/run
 
 map("n", "<leader>o", ":!open-compiled <c-r>%<cr><cr>") -- open compiled
 

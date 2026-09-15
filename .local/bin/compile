@@ -4,11 +4,11 @@
 
 file="${1}"
 ext="${file##*.}"
+dir=$(dirname "$file")
 base="${file%.*}"
 
 if [ -f "makefile" ] || [ -f "Makefile" ]; then
-    make
-    exit $?
+    make && exit 0
 fi
 
 tex_compile() {
@@ -17,31 +17,28 @@ tex_compile() {
         for file in *.tex; do
             if grep -qi "documentclass" "${file}"; then
                 textarget="${file}"
-        aux_files_dir=$(dirname "$file")
                 break
             fi
         done
         [ -z "$textarget" ] && textarget="main.tex"
     else
         textarget="${file}"
-        aux_files_dir=$(dirname "$file")
+        aux_files_dir="${dir}"
     fi
 
-    set -- pdflatex -shell-escape -synctex=1 -interaction=nonstopmode -halt-on-error "--output-directory=${aux_files_dir}"
+    command="pdflatex -shell-escape -synctex=1 --output-directory=${aux_files_dir}"
 
-    "$@" -draftmode "${textarget}" || return
+    ${command} "-draftmode" "${textarget}"
     if grep -qiE "addbibresource|bibliography" "${textarget}"; then
-        if grep -qi "backend=biber" "${textarget}"; then
-            biber "--input-directory=${aux_files_dir}" "${textarget%.*}" || return
-        else
-            # BibTeX rejects absolute output paths; retain project-relative bibliography lookup.
-            build_dir=$(pwd)
-            (cd "$aux_files_dir" && BIBINPUTS="$build_dir:${BIBINPUTS-}" BSTINPUTS="$build_dir:${BSTINPUTS-}" \
-                bibtex "$(basename "${textarget%.*}")") || return
-        fi
-        "$@" -draftmode "${textarget}" || return
+        bibcommand="bibtex"
+        grep -qi "backend=biber" "${textarget}" && bibcommand="biber --input-directory=${aux_files_dir}"
+        ${bibcommand} "${textarget%.*}" && ${command} "-draftmode" "${textarget}"
     fi
-    "$@" "${textarget}"
+    ${command} ${textarget}
+}
+
+tex_compile_tool() {
+    tectonic --synctex "${file}"
 }
 
 md_compile() {

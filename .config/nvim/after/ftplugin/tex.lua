@@ -13,21 +13,9 @@ end
 local function run_open_compiled(args, error_message)
     local command = vim.list_extend({ "open-compiled", vim.fn.expand("%:p") }, args or {})
 
-    local stderr = {}
     local job = vim.fn.jobstart(command, {
         detach = true,
         env = { NVIM_SERVER = servername() },
-        stderr_buffered = true,
-        on_stderr = function(_, data)
-            stderr = data
-        end,
-        on_exit = function(_, code)
-            if code ~= 0 then
-                vim.schedule(function()
-                    vim.notify(error_message .. "\n" .. table.concat(stderr, "\n"), vim.log.levels.ERROR)
-                end)
-            end
-        end,
     })
 
     if job <= 0 then
