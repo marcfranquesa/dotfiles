@@ -4,15 +4,14 @@
 
 file="${1}"
 ext="${file##*.}"
-dir=$(dirname "$file")
 base="${file%.*}"
 
 if [ -f "makefile" ] || [ -f "Makefile" ]; then
-    make && exit 0
+    make
+    exit $?
 fi
 
 tex_compile() {
-    aux_files_dir="."
     if ! grep -qi "documentclass" "${file}"; then
         for file in *.tex; do
             if grep -qi "documentclass" "${file}"; then
@@ -23,22 +22,23 @@ tex_compile() {
         [ -z "$textarget" ] && textarget="main.tex"
     else
         textarget="${file}"
-        aux_files_dir="${dir}"
     fi
 
-    command="pdflatex -shell-escape -synctex=1 --output-directory=${aux_files_dir}"
+    # TeX resolves includes here; BibTeX requires a relative output stem.
+    cd "$(dirname "$textarget")" || return
+    textarget=$(basename "$textarget")
+    set -- pdflatex -shell-escape -synctex=1 -interaction=nonstopmode -halt-on-error
 
-    ${command} "-draftmode" "${textarget}"
+    "$@" -draftmode "${textarget}" || return
     if grep -qiE "addbibresource|bibliography" "${textarget}"; then
-        bibcommand="bibtex"
-        grep -qi "backend=biber" "${textarget}" && bibcommand="biber --input-directory=${aux_files_dir}"
-        ${bibcommand} "${textarget%.*}" && ${command} "-draftmode" "${textarget}"
+        if grep -qi "backend=biber" "${textarget}"; then
+            biber "${textarget%.*}" || return
+        else
+            bibtex "${textarget%.*}" || return
+        fi
+        "$@" -draftmode "${textarget}" || return
     fi
-    ${command} ${textarget}
-}
-
-tex_compile_tool() {
-    tectonic --synctex "${file}"
+    "$@" "${textarget}"
 }
 
 md_compile() {

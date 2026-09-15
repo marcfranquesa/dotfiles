@@ -3,11 +3,8 @@
 # back-end script that opens a compiled file
 
 file="${1}"
-
-case "${file}" in
-/*) ;;
-*) file="$(pwd)/${file}" ;;
-esac
+[ -f "$file" ] || { printf 'Source file not found: %s\n' "$file" >&2; exit 1; }
+file=$(realpath "$file")
 
 ext="${file##*.}"
 dir=$(dirname "$file")
@@ -34,7 +31,8 @@ if command -v launchctl >/dev/null 2>&1; then
 fi
 
 zathura_open() {
-    setsid -f zathura "$@" >/dev/null 2>&1
+    # Neovim already detaches this process; --fork can crash Cocoa on macOS.
+    exec zathura "$@" </dev/null >/dev/null
 }
 
 link_pdf() {
@@ -56,12 +54,9 @@ find_pdf() {
             return 0
         fi
 
-        set -- "${search_dir}"/*.pdf
-        if [ -e "$1" ]; then
-            printf "%s\n" "$1"
-            return 0
-        fi
-
+        # A missing project PDF must not select a document from a parent project.
+        [ -f "${search_dir}/main.tex" ] && break
+        [ -e "${search_dir}/.git" ] && break
         [ "${search_dir}" = "/" ] && break
         parent_dir=$(dirname "${search_dir}")
         [ "${parent_dir}" = "${search_dir}" ] && break
@@ -71,30 +66,30 @@ find_pdf() {
     return 1
 }
 
-ensure_synctex() {
-    synctex="${pdf%.pdf}.synctex.gz"
-    [ -s "${synctex}" ] && [ ! "${synctex}" -ot "${pdf}" ] && return
-    command -v compile >/dev/null 2>&1 || return
-    compile "${file}" >/dev/null 2>&1 || return
-    pdf=$(find_pdf) || exit 1
-}
-
 case "${ext}" in
 md)
+    [ -f "${base}.pdf" ] || { printf 'PDF not found: %s.pdf\n' "$base" >&2; exit 1; }
     link_pdf "${base}.pdf"
-    zathura_open "${base}.pdf"
+    zathura_open "${base}.pdf" &
     ;;
 tex)
     line="${2}"
     column="${3:-1}"
-    pdf=$(find_pdf) || exit 1
-    ensure_synctex
+    pdf=$(find_pdf) || { printf 'No compiled PDF for %s; compile the document first.\n' "$file" >&2; exit 1; }
+    if [ -n "$line" ] && [ ! -s "${pdf%.pdf}.synctex.gz" ] && [ ! -s "${pdf%.pdf}.synctex" ]; then
+        printf 'SyncTeX data missing for %s; compile with -synctex=1 first.\n' "$pdf" >&2
+        exit 1
+    fi
     link_pdf "${pdf}"
 
     if [ -n "${line}" ]; then
-        zathura_open -x "${synctex_editor}" "--synctex-forward=${line}:${column}:${file}" "${pdf}" || zathura_open "${pdf}"
+        zathura_open -x "${synctex_editor}" "--synctex-forward=${line}:${column}:${file}" "${pdf}"
     else
-        zathura_open -x "${synctex_editor}" "${pdf}" || zathura_open "${pdf}"
+        zathura_open -x "${synctex_editor}" "${pdf}"
     fi
+    ;;
+*)
+    printf 'Unsupported source type: %s\n' "$ext" >&2
+    exit 1
     ;;
 esac

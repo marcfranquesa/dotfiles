@@ -83,14 +83,19 @@ resolve_file() {
 }
 
 select_server() {
-    for server in "${server_arg}" "${NVIM_SERVER}" "${NVIM}" "${NVIM_PIPE}"; do
+    # A closed linked editor must not redirect a click into another editor.
+    if [ -n "$server_arg" ]; then
+        is_server "$server_arg" || return 1
+        printf "%s\n" "$server_arg"
+        return
+    fi
+
+    for server in "${NVIM_SERVER}" "${NVIM}" "${NVIM_PIPE}"; do
         is_server "${server}" && printf "%s\n" "${server}" && return
     done
 
-    first=""
     for server in ${candidates}; do
         is_server "${server}" || continue
-        [ -z "${first}" ] && first="${server}"
 
         cwd=$(nvim_expr "${server}" "getcwd()")
         case "${file}" in
@@ -101,7 +106,7 @@ select_server() {
         esac
     done
 
-    [ -n "${first}" ] && printf "%s\n" "${first}"
+    return 1
 }
 
 candidates=""
@@ -115,11 +120,12 @@ for server in "${runtime_dir}/nvim"/shell-*.pipe "${runtime_dir}"/nvim.*.0 "/tmp
     add_candidate "${server}"
 done
 
+[ -n "${file}" ] || exit 1
 file=$(resolve_file "${file}")
+[ -f "${file}" ] || exit 1
 server=$(select_server)
 
-[ -n "${file}" ] || exit 1
 [ -n "${server}" ] || exit 1
 
 file_escaped=$(printf "%s" "${file}" | sed "s/'/''/g")
-nvim_expr "${server}" "execute('silent! wall | edit +' . ${line} . ' ' . fnameescape('${file_escaped}') . ' | call cursor(${line}, ${column}) | normal! zz')" >/dev/null || exit 1
+nvim_expr "${server}" "execute('hide buffer ' . bufadd('${file_escaped}') . ' | call cursor(${line}, ${column}) | normal! zz')" >/dev/null || exit 1
