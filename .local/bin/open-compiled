@@ -37,6 +37,11 @@ zathura_open() {
     setsid -f zathura "$@" >/dev/null 2>&1
 }
 
+link_pdf() {
+    [ -n "${TMUX_PANE}" ] || return 0
+    tmux set-option -pq -t "${TMUX_PANE}" @zathura_pdf "$(realpath "$1")"
+}
+
 find_pdf() {
     wanted="${base}.pdf"
     if [ -f "${wanted}" ]; then
@@ -76,6 +81,7 @@ ensure_synctex() {
 
 case "${ext}" in
 md)
+    link_pdf "${base}.pdf"
     zathura_open "${base}.pdf"
     ;;
 tex)
@@ -83,6 +89,7 @@ tex)
     column="${3:-1}"
     pdf=$(find_pdf) || exit 1
     ensure_synctex
+    link_pdf "${pdf}"
 
     if [ -n "${line}" ]; then
         zathura_open -x "${synctex_editor}" "--synctex-forward=${line}:${column}:${file}" "${pdf}" || zathura_open "${pdf}"

@@ -1,0 +1,23 @@
+#!/bin/sh
+
+pane="${1:?tmux pane required}"
+[ "$(tmux display-message -p -t "$pane" '#{pane_active}:#{window_active}:#{pane_current_command}')" = "1:1:nvim" ] || exit 0
+pdf=$(tmux show-option -pqv -t "$pane" @zathura_pdf)
+[ -n "$pdf" ] || exit 0
+
+# AXRaise brings the PDF forward without activating Zathura or changing pages.
+osascript - "$pdf" <<'APPLESCRIPT'
+on run argv
+    set pdfPath to item 1 of argv
+    tell application "System Events"
+        repeat with viewer in (application processes whose name is "zathura")
+            repeat with pdfWindow in windows of viewer
+                if name of pdfWindow is pdfPath then
+                    perform action "AXRaise" of pdfWindow
+                    return
+                end if
+            end repeat
+        end repeat
+    end tell
+end run
+APPLESCRIPT
