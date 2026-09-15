@@ -122,4 +122,4 @@ server=$(select_server)
 [ -n "${server}" ] || exit 1
 
 file_escaped=$(printf "%s" "${file}" | sed "s/'/''/g")
-nvim_expr "${server}" "execute('silent! wall | edit +' . ${line} . ' ' . fnameescape('${file_escaped}') . ' | call cursor(${line}, ${column}) | normal! zz')" >/dev/null || exit 1
+nvim_expr "${server}" "execute('hide buffer ' . bufadd('${file_escaped}') . ' | call cursor(${line}, ${column}) | normal! zz')" >/dev/null || exit 1

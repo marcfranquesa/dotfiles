@@ -34,7 +34,8 @@ if command -v launchctl >/dev/null 2>&1; then
 fi
 
 zathura_open() {
-    setsid -f zathura "$@" >/dev/null 2>&1
+    # Neovim already detaches this process; --fork can crash Cocoa on macOS.
+    exec zathura "$@" </dev/null >/dev/null
 }
 
 link_pdf() {
@@ -82,7 +83,7 @@ ensure_synctex() {
 case "${ext}" in
 md)
     link_pdf "${base}.pdf"
-    zathura_open "${base}.pdf"
+    zathura_open "${base}.pdf" &
     ;;
 tex)
     line="${2}"
@@ -92,9 +93,9 @@ tex)
     link_pdf "${pdf}"
 
     if [ -n "${line}" ]; then
-        zathura_open -x "${synctex_editor}" "--synctex-forward=${line}:${column}:${file}" "${pdf}" || zathura_open "${pdf}"
+        zathura_open -x "${synctex_editor}" "--synctex-forward=${line}:${column}:${file}" "${pdf}"
     else
-        zathura_open -x "${synctex_editor}" "${pdf}" || zathura_open "${pdf}"
+        zathura_open -x "${synctex_editor}" "${pdf}"
     fi
     ;;
 esac
