@@ -106,3 +106,19 @@ REVIEW_PROMPT
 Prompt examples: `Critique this implementation plan for hidden assumptions and
 simpler alternatives:` or `Review the change to <paths> for correctness risks
 and missing tests:`.
+
+## Skill maintenance
+
+When using a skill, notice mismatches with the user's request,
+outdated instructions, repeated friction, or useful simplifications.
+
+When a durable improvement is warranted, proactively propose the
+smallest concrete change and ask before applying it, unless the user
+already requested that skill change. Continue the current task using
+the user's instructions.
+
+Prefer correcting, replacing or deleting instructions over adding
+more rules or files. Do not turn one-off exceptions into defaults.
+
+After approval, update the canonical skill and any affected helpers
+or references, verify the change, and briefly report what changed.
