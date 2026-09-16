@@ -3,9 +3,9 @@
     "commit": "",
     "pr": ""
   },
-  "effortLevel": "high",
+  "model": "fable",
+  "effortLevel": "medium",
   "skipWorkflowUsageWarning": true,
   "theme": "auto",
-  "switchModelsOnFlag": true,
-  "model": "claude-fable-5[1m]"
+  "switchModelsOnFlag": true
 }
