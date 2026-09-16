@@ -14,7 +14,7 @@
 [gpg]
     format = ssh
 [commit]
-    gpgsign = true
+    gpgsign = false
 [tag]
     gpgsign = true
 [gpg "ssh"]
