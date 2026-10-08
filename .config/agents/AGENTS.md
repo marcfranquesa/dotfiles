@@ -46,24 +46,26 @@ app, run `tailscale serve --bg localhost:<port>` and report the printed URL.
 
 ## Model Handoffs
 
+- Use Claude Opus 5.5 with high effort by default for Claude tasks, handoffs,
+  and cross-model reviews (`--model claude-opus-5-5 --effort high`).
 - Hand off a task or subtask when another available model is materially better
   suited to it. Give the receiving model the artifact, audience, constraints,
   and success criteria; the primary agent remains responsible for integration,
   correctness, and verification.
 - For substantial taste-driven visual work—including report and dashboard
-  design, websites, presentations, visual identity, and UX—a non-Fable agent
-  should hand off the design direction and at least one iteration to Fable when
-  practical. Do this early enough for Fable to shape the result, rather than
-  using it only for final review.
+  design, websites, presentations, visual identity, and UX—an agent using
+  another model should hand off the design direction and at least one iteration
+  to Opus 5.5 with high effort when practical. Do this early enough for Opus 5.5
+  to shape the result, rather than using it only for final review.
 - This does not apply to routine report updates, plain-text summaries, or
   mechanical styling changes.
 
 Examples:
 
-- For an HTML experiment report, ask Fable to design or refine the information
+- For an HTML experiment report, ask Opus 5.5 to design or refine the information
   hierarchy, layout, typography, color, and figure presentation. The primary
   agent should implement it and verify the data and behavior.
-- For a website or UX flow, ask Fable to establish the visual direction and
+- For a website or UX flow, ask Opus 5.5 to establish the visual direction and
   critique rendered screenshots during iteration.
 
 ## Cross-Model Review
@@ -81,7 +83,7 @@ Codex -> Claude:
 
 ```sh
 claude -p \
-  --model fable \
+  --model claude-opus-5-5 \
   --effort high \
   --no-session-persistence \
   --permission-mode dontAsk \
