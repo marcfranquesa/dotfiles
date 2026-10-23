@@ -31,4 +31,5 @@ _darcs
 ^/bootstrap/*
 ^/docs/*
 ^/.agents/*
+^/\.config/agents/skills(/|$)
 \.DS_Store

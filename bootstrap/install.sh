@@ -21,6 +21,10 @@ case "$shell" in
         ;;
 esac
 
-command -v stow > /dev/null && stow . && exit 0
+if command -v stow > /dev/null; then
+    # Keep this parent unfolded so Stow applies the skill-source ignore.
+    mkdir -p ../.config/agents || exit 1
+    exec stow .
+fi
 
 echo "stow is not present" && exit 1
